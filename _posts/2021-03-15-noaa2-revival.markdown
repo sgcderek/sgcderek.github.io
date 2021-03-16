@@ -18,7 +18,7 @@ However what differentiates NOAA-2's newfound signal from NOAA-9's is the fact t
 
 After seeing Scott's tweet, I have decided to use my own setup to attempt recording the signal;
 
-![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-waterfall.png?raw=true)
+[![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-waterfall.png?raw=true)](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-waterfall.png?raw=true)
 
 The signal is being broadcast from NOAA-2 at 1697.5 MHz, so far it seems like it is active for about 30 seconds which is then followed by about a minute long period of silence. I received the signal shown above during daylight, and it is safe to assume that it would not be broadcast at night when the satellite's solar panels aren't receiving power, however this still hasn't been confirmed.
 
@@ -34,7 +34,7 @@ Just like with Transit 5B-5 before, Xerbo took a closer look at the signal that 
 
 After experimenting with the signal, Xerbo was able to determine how it is modulated, and extracted what would have been an Earth image if the satellite was still fully operational.
 
-![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-image.png?raw=true)
+[![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-image.png?raw=true)](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-image.png?raw=true)
 
 On the image above you can see a crop of the sync (2 vertical lines) and voltage calibration ramp. The empty grey/black parts are where the image would have been. This is similar to the calibration stripes that you may be familiar with from APT images. Basically it could be said that NOAA-2 is broadcasting "blank APT".
 
