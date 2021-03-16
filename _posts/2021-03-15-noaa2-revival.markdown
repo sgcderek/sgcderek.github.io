@@ -40,12 +40,12 @@ On the image above you can see a crop of the sync (2 vertical lines) and voltage
 
 As mentioned though this isn't actual APT, although this satellite did have an APT payload. Following is a table containing the original frequencies this satellite was able to broadcast on. Note that so far only the L-Band link was observed active (and is the source of the "image" decoded above). There have been a few attempts to identify other emissions around 136 - 138 MHz but so far nothing has been found.
 
-| Link | Frequency (MHz) | Modern counterpart*
+| Link | Frequency (MHz)   | Modern counterpart*
 |--|--|--|
 | Beacon | 136.77 | DSB |
 | VHF Real-time | 137.50 | APT |
 | VHF Real-time (backup) | 137.62 | APT |
-| L-Band Real-time/playback | 1697.50 | HRPT/GAC |  
+| L-Band Real-time/playback   | 1697.50 | HRPT/GAC |  
 
 **not the original names used for the links by NOAA*
 
