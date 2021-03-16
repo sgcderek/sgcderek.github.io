@@ -1,11 +1,9 @@
 remote_theme: thelehhman/texture
-title: test
-author: GitHub User
-email: your-email@domain.com
+title: Derek OK9SGC
+author: Derek
+email: 
 description: > # this means to ignore newlines until "show_exerpts:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  description goes here
 show_excerpts: true # set to true to show excerpts on the homepage
 
 # Minima date format
@@ -15,19 +13,16 @@ sass:
 
 permalink: /posts/:title/
 texture:
-  title: Adam Denisov
-  tagline: test2
+  title: Derek OK9SGC
+  tagline: 
   date_format: "%b %-d, %Y"
   style: black
   showNav: false
-  showPicker: true
+  showPicker: false
 
   # generate social links in footer
   social_links:
-    twitter: thelehhman
-    github:  thelehhman
-    linkedIn: in/thelehhman
-    rss: rss
+    twitter: dereksgc
  
 
 # If you want to link only specific pages in your header, uncomment
