@@ -39,6 +39,7 @@ As mentioned though this isn't actual APT, although this satellite did have an A
 | VHF Real-time | 137.50 | APT |
 | VHF Real-time (backup) | 137.62 | APT |
 | L-Band Real-time/playback | 1697.50 | HRPT/GAC |  
+
 **not the original names used for the links by NOAA*
 
 It is not known when exactly NOAA-2 started transmitting this signal, however given the strength of the carriers included in the signal and its proximity in frequency to other satellites such as NOAA-19, METEOR-M N2/N2-2 or ARKTIKA-M N1, we can conclude that it must have been a recent revival as it would not take long to notice it.
