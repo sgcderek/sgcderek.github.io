@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "NOAA-2 returning from the dead"
+description: 
+date:   2021-03-15
+categories: 
+---
 A few days ago, a long-time amateur radio satellite watcher Scott Tilley  [announced on Twitter](https://twitter.com/coastal8049/status/1370568925386215428)  that his automated L-Band receiver detected signal emissions from the old NOAA-2 satellite.
 
 This satellite, also known as ITOS-D prior to its NOAA classification, was launched in 1972. It had operated until early 1975, after which it was decommissioned by NOAA and effectively considered "dead".
