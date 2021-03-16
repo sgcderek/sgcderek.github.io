@@ -2,7 +2,7 @@ A few days ago, a long-time amateur radio satellite watcher Scott Tilley  [annou
 
 This satellite, also known as ITOS-D prior to its NOAA classification, was launched in 1972. It had operated until early 1975, after which it was decommissioned by NOAA and effectively considered "dead".
 
-![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/ITOS-TIROS-comp.png?raw=true)
+![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/ITOS-TIROS-comp.png?raw=true)  
 *NOAA-2 (left) and NOAA-19 (right), showing the significant differences between the satellite bus designs*
 
 It is not too uncommon for old decommissioned satellites to start transmitting a signal again, you may be familiar with a similar phenomenon that's happened to Transit 5B-5 or NOAA-9, and plenty other satellites. Happysat has a [page on his blog](http://happysat.nl/Deadsat/Gallery.html) documenting emissions like this, but note that it's now out of date and the satellites shown there may no longer be active.
