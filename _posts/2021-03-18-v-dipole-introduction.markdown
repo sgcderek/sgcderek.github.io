@@ -104,7 +104,7 @@ Before you start building an antenna, even before you start getting the material
 
 To come up with the leg length, we can simply divide the number 147 with the desired frequency in MHz. This will give us the combined length of the dipole in metres. Further dividing this by 2 will leave us with the target length for each leg. So, in our case:
 
-147 / 137.5 ≃ 1.07
+147 / 137.5 ≃ 1.07  
 1.07 / 2 = 0.535 → **53.5 cm**
 
 This will be the leg measurement I will be following from now on, however if you got a different result for your desired frequency you can still follow along, just using a different leg length.
