@@ -14,6 +14,8 @@ This satellite, also known as ITOS-D prior to its NOAA classification, was launc
 
 It is not too uncommon for old decommissioned satellites to start transmitting a signal again, you may be familiar with a similar phenomenon that's happened to Transit 5B-5 or NOAA-9, and plenty other satellites. Happysat has a [page on his blog](http://happysat.nl/Deadsat/Gallery.html) documenting emissions like this, but note that it's now out of date and the satellites shown there may no longer be active.
 
+[2021-03-19] Happysat got in touch and said that he may soon be revisiting his lists of historical satellites still broadcasting, so make sure to go check out his blog after this!
+
 However what differentiates NOAA-2's newfound signal from NOAA-9's is the fact that the hardware responsible for encoding and modulating it still seems to be operational. This is similar to the already mentioned Transit 5B-5, in fact you may remember a recent [blog post](https://xerbo.net/posts/investigating-transit-pt1/) from Xerbo about the analysis and subsequent decoding of the Transit signal, that has revealed unmistakable patterns in the binary data such as a frame counter.
 
 After seeing Scott's tweet, I have decided to use my own setup to attempt recording the signal;
