@@ -5,8 +5,6 @@ description:
 date:   2021-08-08
 categories: 
 ---
-# How an LNB works
-
 ## Introduction
 
 About two years ago I first started playing with the idea of receiving geostationary TV satellites using an SDR after reading an [RTL-SDR blog post](https://www.rtl-sdr.com/receiving-satellite-tv-beacons-rtl-sdr-lnb/) about it.  
