@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "NOAA-2 returning from the dead"
-description: "The old and decommissioned NOAA-2 satellite has been observed transmitting a signal on its original frequency."
+description:
 date:   2021-03-15
 categories: 
 ---
