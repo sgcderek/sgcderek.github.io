@@ -9,6 +9,8 @@ categories:
 Previous article: [**How an LNB works**](https://sgcderek.github.io/posts/how-an-lnb-works/)  
 Next article: **Receiving the Ku-Band and Es'Hail-2 using an SDR** *(coming soon)*
 
+___
+
 ## Introduction
 
 In the previous post in this "series" I have explained what an LNB is and what it does in order to deliver high frequency microwave broadcasts to receivers over ordinary UHF/L-Band equipment. In this post I will present you an example of utilizing an LNB's functionality in the amateur radio world and actually using it with your SDR.
