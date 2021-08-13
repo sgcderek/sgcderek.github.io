@@ -99,13 +99,13 @@ With all that said though, keep in mind this is only really applicable when you'
 
 ## Final setup
 
-Below you can see a block diagram of what the setup to interface an SDR with a universal Ku-Band LNB can look like. It also represent the setup that I have successfully used in the past.
+Below you can see a block diagram of what the setup to interface an SDR with a universal Ku-Band LNB can look like. It also represents the setup that I have successfully used in the past.
 
 ![Block diagram of a basic SDR/LNB interface setup](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/4/setup.jpeg)
 
 One thing that I haven't yet mentioned, which you probably realized, is the satellite dish antenna. That is because, unlike LNBs and most other hardware, pretty much any dish that can be used for television reception can be used in this case as well. Unless it is physically bent or otherwise damaged, there isn't really anything that can go wrong with it, so you can often get used ones pretty much for free from people who have moved from satellite television to internet or cable.
 
-There is one caveat though, and that is that in order for an LNB to fully utilize its dish, its illumination (beam) angle must match the focal length to diameter (f/D) ratio of the dish. This again sounds more complicated than it really is. For example, a C-Band LNB that's meant to be used with a large prime-focus dish will have a wider beam angle than a unversal Ku-Band LNB from a much smaller offset dish. I doubt that this will even be a factor for you though, as in case of Ku-Band reception only offset dishes are really used, and they all have very similar f/D ratios.
+There is one caveat though, and that is that in order for an LNB to fully utilize its dish, its illumination (beam) angle must match the focal length to diameter (f/D) ratio of the dish. This again sounds more complicated than it really is. For example, a C-Band LNB that's meant to be used with a large prime-focus dish will have a wider beam angle than a universal Ku-Band LNB from a much smaller offset dish. I doubt that this will even be a factor for you though, as in case of Ku-Band reception only offset dishes are really used, and they all have very similar f/D ratios.
 
 The diameter of the dish dictates the signal-to-noise ratio that you can expect. A bigger dish will receive stronger signals but will also be more challenging to aim as its own beam will become narrower. In case of Ku-Band satellite television, about 80 cm is the usual diameter used for Astra and similar satellites, and it is also about the diameter that you should aim for as it gives good performance while still being small enough to be handled easily. If you do however have access to a bigger dish and you like the challenge of getting it working and the potential of a stronger signal, then by all means go for it. That is the basis of satellite TV [DXing](https://en.wikipedia.org/wiki/TV_and_FM_DX) which is a whole another hobby that can be explored.
 
