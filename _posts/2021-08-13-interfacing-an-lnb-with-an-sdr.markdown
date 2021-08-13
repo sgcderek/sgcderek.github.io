@@ -84,6 +84,7 @@ Before connecting to the SDR you may also want to consider using an attenuator. 
 An example image of a cheap 20dB attenuator can be found below. These can be bought with male and female F connectors already in place so they can just be inserted between the Bias-T RF port and the F-SMA adapter before the SDR (the attenuator should be in the RF only path, you shouldn't pass your supply direct current through it).
 
 ![20dB F connector attenuator](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/4/attenuator.png)
+
 Speaking of which, you will need a way to finally connect the setup to your SDR's antenna port. Most SDRs have a female SMA port, unless you are using a USB TV tuner stick which may come with a different one (in some cases easier to adapt). In any case, you will need an adapter. That may arguably be one of the most difficult parts to obtain in the setup, however it is neccessary for a proper connection. A female F to a male SMA adapter can come very handy in many other situations as well, so I consider it a useful investment.
 
 ![Male SMA to female F connector adapter](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/4/f-sma-adapter.jpeg)
