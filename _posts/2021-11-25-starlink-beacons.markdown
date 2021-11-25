@@ -21,19 +21,19 @@ While my first course of action was to mount an LNB on the biggest dish reflecto
 
 And behold; the signals coming through just an old LNB sitting on a table had more than enough strength to be noticeable and audible, with the wider beam of the LNB allowing the reception of multiple satellites simultaneously (I believe at one point I was able to see distinct Doppler curves from four or five satellites at once).
 
-![Beacon signals from multiple Starlink satellites received by an LNB](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/fft-short.png)
+![Beacon signals from multiple Starlink satellites received by an LNB](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/fft-short.png)  
 *Beacon signals from multiple Starlink satellites received by an LNB sitting on a table*
 
 Afterwards I have decided to put the LNB into a location where it has a better view of the sky. The best spot I could find on the balcony was a leftover scaffolding pipe, so I temporarily taped it to the pipe with a bent copper wire for some separation.
 
-![A very advanced Starlink antenna](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/lnb.png)
+![A very advanced Starlink antenna](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/lnb.png)  
 *A very advanced Starlink antenna*
 
 This is all different wording for "I just pointed it up", that's literally all you have to do I just wanted to include an example for some reason.
 
 In any case it worked surprisingly well. After connecting my SDR and powering it up, I left it running for several minutes, rendering a slow waterfall plot in SDR#;
 
-![Starlink beacon waterfall plot](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/fft-long.png)
+![Starlink beacon waterfall plot](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/fft-long.png)  
 *Starlink beacon waterfall plot*
 
 Even though the LNB has a much wider beam width than a dish reflector, it still isn't able to receive the beacon for most of the satellite's pass. I have also noticed that the signals tend to get a lot weaker when receiving at an angle, suggesting the satellite's own antenna array is beamed narrowly, so an antenna with a beam wider than the LNB would probably be detrimental to the setup.
@@ -44,12 +44,12 @@ To power the LNB I am using a [DIY control box](https://twitter.com/dereksgc/sta
 
 **Make sure to never connect a power injector or a Bias-T backwards; sending direct current into an SDR can destroy it.** Use an additional DC blocker on the input of your SDR if you want to be extra safe, or at the very least check whatever you are connecting to your SDR with a voltmeter beforehand to make sure no current will be passed where it shouldn't.
 
-![Diagram of a basic Starlink beacon receiver](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/diagram.png)
+![Diagram of a basic Starlink beacon receiver](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/starlink-beacon-receiver/diagram.png)  
 *Diagram of a basic Starlink beacon receiver setup*
 
 As mentioned briefly above, pretty much any Ku-Band LNB can be used. The absolutely most used standard - at least in Europe - is the universal linear "Astra" LNB which has LO frequencies of 9.75 and 10.6 GHz. The Starlink beacons can be received with the 9.75 GHz LO which also happens to be the default, hence why you don't need any other control hardware besides the power injector.
 
-![Examples of power injectors](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/4/injectors.jpeg)
+![Examples of power injectors](https://raw.githubusercontent.com/sgcderek/sgcderek.github.io/main/images/4/injectors.jpeg)  
 *Examples of power injectors. The best ones for this case would be the ones with F connectors. If you want to use an injector with its own power supply, make sure it is DC and within the 12-18 volt range. If it's not then you can chop it off and connect your own voltage source to the exposed wires. (Also don't worry about the frequency range being lower than the LNB IF output, it's going to be fine as long as you aren't using a specifically filtered injector)*
 
 The LNB mixes the 11325 MHz Starlink signal with whatever the frequency of its LO is. We can calculate the output (IF - intermediate frequency) by subtracting the LO frequency from the input. In case of the standard 9.75 GHz LNB it is
