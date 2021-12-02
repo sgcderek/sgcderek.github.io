@@ -6,7 +6,7 @@ date:   2021-11-25
 categories: 
 ---
 
-*Next article:* [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
+**Next article:** [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
 
 In this post I will present how it is possible to receive beacon signals from the Starlink satellites in low-Earth orbit using ordinary hardware that you most likely already have laying around or that is widely available.  
 
@@ -71,4 +71,4 @@ Whatever you decide to do with the signal, whether it's Doppler analysis using s
 
 If you have any questions or suggestions, [contacting me via Twitter](https://twitter.com/dereksgc) is probably the best way right now. Thanks for reading!
 
-*Next article:* [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
+**Next article:** [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
