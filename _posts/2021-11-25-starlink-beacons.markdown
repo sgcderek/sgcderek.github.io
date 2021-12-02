@@ -5,6 +5,9 @@ description:
 date:   2021-11-25
 categories: 
 ---
+
+*Next article:* [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
+
 In this post I will present how it is possible to receive beacon signals from the Starlink satellites in low-Earth orbit using ordinary hardware that you most likely already have laying around or that is widely available.  
 
 **Things you will need:**
@@ -67,3 +70,5 @@ One fun thing about the Starlink beacons is that each satellite broadcasts a clu
 Whatever you decide to do with the signal, whether it's Doppler analysis using software like *strf* or simply just listening to it for a while and showing it off to people, I hope this post was helpful and cleared things up. This is a unique opportunity to experiment with a whole different frequency band and hardware for SDR owners without having to spend obscene amounts of money on precision, custom, or obscure RF hardware and expensive SDRs.
 
 If you have any questions or suggestions, [contacting me via Twitter](https://twitter.com/dereksgc) is probably the best way right now. Thanks for reading!
+
+*Next article:* [Hard-wiring an LNB to use the high band 10.6 GHz oscillator](https://sgcderek.github.io/posts/lnb-high-band-mod/)
