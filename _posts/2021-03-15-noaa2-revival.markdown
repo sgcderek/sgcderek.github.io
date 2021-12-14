@@ -56,9 +56,3 @@ It is not known when exactly NOAA-2 started transmitting this signal, however gi
 It is also not known how long the satellite will stay alive. It may become a new longtime member of the historic fleet alongside the likes of Transit 5B-5, NOAA-9, or FengYun-1D, or it may shut off any second now remaining silent forever...
 
 The baseband containing my signal can be downloaded [here](https://cloud.xerbo.net/s/PnSWL9TGmMFZJtF). Thanks again to Xerbo for taking his time to decode this and hosting the baseband recording on his server.
-
-<details> 
-  <summary>Test1 </summary>
-   Test2 
-</details>
-
