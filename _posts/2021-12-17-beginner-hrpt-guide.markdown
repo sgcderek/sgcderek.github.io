@@ -34,14 +34,14 @@ categories:
 
 
 # 1. Introduction
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 1.1 Below 1.7 GHz](#2-hardware-requirements)  
 [⇊ 2. Hardware Requirements](#2-hardware-requirements)
 
 In this blog post I will try to explain what HRPT is and how to receive it using a cheap hardware setup based on an RTL-SDR. I will try my best to present the information in such a way that you should be able to understand it even with limited knowledge and experience with receiving satellites, however some basic knowledge of SDR and how to operate it will be necessary, otherwise the topic would get way too convoluted. Still it is very likely you will come across sections with information you already know, so I will provide a link to skip each section. I will also update this post when needed. When that happens, I will add a note with a section link directly below this paragraph so you can only read the updated parts in the future.
 
 ## 1.1 Below 1.7 GHz
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 1.2 What is HRPT](#12-what-is-hrpt)
 
 It is pretty much impossible to talk about HRPT without at least mentioning APT and LRPT. If you've had any exposure to or experience with SDR and satellites before, that is most likely one of the things you've heard about or possibly even tried receiving yourself. 
@@ -53,7 +53,7 @@ However, because APT and LRPT broadcasts take place in the 137 MHz range, they a
 While APT thanks to its low bandwidth and analog nature is usually pretty resilient, LRPT is already pushing the limits of the 137 MHz radio band. If you've done any APT or LRPT reception yourself, you have probably already seen broadcasts from more than one weather satellite at the same time. This may be advantageous when they occur at different frequencies, but more often this cross-talk happens between APT and LRPT sharing the same frequency, resulting in the decoded data from both signals being very damaged or not recoverable whatsoever.
 
 ## 1.2 What is HRPT
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 1.3 HRPT satellite constellations](#13-hrpt-satellite-constellations)
 
 Not only do HRPT broadcasts contain much more data at a much higher quality, the overlapping signal issue common with APT and LRPT is virtually non-existent with HRPT. Partly because of the significantly higher selectivity of the directional microwave antennas used, but also because the 1700 MHz weather satellite band simply has more bandwidth to go around than the 137 MHz one; 15x more for the LEO segment only, which isn't shared with other constellations such as 137 MHz Orbcomm or SpaceBee.
@@ -63,7 +63,7 @@ There are also more satellites with currently active HRPT payloads than APT and 
 All HRPT data is broadcast uncompressed with peak resolutions of around 1km/px (while APT is 4km/px and LRPT 1km/px with heavy jpeg compression). The overall effective resolution of a HRPT data set will differ depending on the satellite, but when geometry correction is applied it isn't very noticeable.
 
 ## 1.3 HRPT satellite constellations
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 1.4 Expected Results](#14-expected-results)
 
 There are currently four satellite constellations with operational HRPT payloads;
@@ -81,7 +81,7 @@ After MetOp-A's deactivation about a week ago, the European MetOp constellation 
 The Chinese FengYun-3B and FengYun-3C are the only active members of their constellation to carry 1700 MHz HRPT payloads. There is the lowest amount of available information on the status of these, with their behavior being the most erratic of all HRPT satellites. FengYun-3B seems to only transmit HRPT in some parts of the world (including Europe, North America, and Asia), and it has been reported to be silent on passes above Australia. FengYun-3C seems to exclusively transmit only when passing over Asia, only barely receivable on some passes from far-Eastern Europe.
 
 ## 1.4 Expected results
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2. Hardware requirements](#2-hardware-requirements)
 
 Following are direct links to image examples of HRPT decoded from all four satellite types (not embedding images here directly to preserve vertical space);
@@ -93,12 +93,12 @@ Following are direct links to image examples of HRPT decoded from all four satel
 Note that the colors differ for each one as each satellite type offers a different spectral band selection. All besides FengYun-3 are false color composites utilizing mostly infrared light, while the FengYun-3 composite is a natural color mix of visible red, green and blue bands with the same IR bands as the other satellites. Also note that the image quality is decreased in these examples, partly due to my own poor antenna tracking but mostly because the images are jpegs. Unlike LRPT, HRPT is not compressed at all, and to demonstrate [here](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/HRPT/NOAA-19_AVHRR_CMWIR.png?raw=true) is a lossless png crop from the above NOAA image (also without geometry correction to further reduce blur).
 
 # 2. Hardware requirements
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.1 Computer](#21-computer)  
 [⇊ 3. Tracking](#3-tracking)
 
 ## 2.1 Computer
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.2 Receiver](#22-receiver)
 
 Because the HRPT antenna needs to be in a wide open area with a good view of the sky, connecting it to a computer may be a challenge. I strongly recommend using a laptop, the actual hardware requirements of which aren't very strict as to this day I am successfully using an HP630 with a dual-core 1.5 GHz Intel Celeron. Nowadays this laptop would go for around 30 - 40 € and it is still fast enough for 6 MHz baseband recording (not a MHz higher than that though). I did however replace its hard-drive with a cheap SSD, since fast write speed is required.
@@ -106,7 +106,7 @@ Because the HRPT antenna needs to be in a wide open area with a good view of the
 It is important to have the laptop as far from the antenna as possible. I usually mount the SDR on the arm of my dish and then connect it to the laptop using a 5m USB 2.0 active extension cable. When selecting a cable like that, it is important to make sure that it's rated for full-speed USB 2.0.
 
 ## 2.2 Receiver
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.3 Amplifier](#23-amplifier)
 
 The minimum requirements for an SDR receiver are that it has to be able to tune up to 1.7 GHz and sample 2.6 MHz of spectrum. This will cover the POES, Meteor-M and MetOp setellites, while at least 3 MHz are needed for FengYun-3. The RTL-SDR V3 and other receivers based on the same hardware (such as the Nooelec NESDR SMArt v4) will have no trouble recording and decoding POES and Meteor-M, with a good chance at decoding MetOp HRPT as well using the 2.56 Msps mode. While their tuner can sample at higher rates, it is usually not stable enough to actually record and decode anything, so they aren't usable for FengYun-3 HRPT.
@@ -116,7 +116,7 @@ With that said, the receiver I would recommend for a starter setup would be eith
 Another important characteristic of the SDR is what kind of Bias-Tee it has, if any, as that will also play into the following section. The RTL-SDR V3 comes with a 4.5V/180mA software-controlled bias, while Nooelec sells a variant of the NESDR with a permanently enabled 4.5/250mA bias. The Airspy Mini has a software-controlled 4.5V/50mA bias, which is on the weaker side.
 
 ## 2.3 Amplifier
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.4 Dish Reflector](#24-dish-reflector)
 
 Due to the high microwave frequencies that HRPT is found at, it is pretty much mandatory to use at least a low-noise amplifier (LNA) between the antenna and the SDR. The LNA needs to be connected as close to the antenna as possible (ideally directly to it), so that it can quickly amplify the very weak 1.7 GHz signals collected by your dish reflector before they have time to dissipate inside the coax and RF circuitry of the SDR. While it is possible to detect the HRPT signals with an SDR connected directly to the antenna without an LNA, once it is added it improves the reception so significantly that there really isn't a point trying to get a good HRPT decode without one.
@@ -128,7 +128,7 @@ The ones that you will see used most commonly (and ones I recommend as well) are
 Speaking of which, when using an SDR setup with a powered LNA in the chain, no matter whether it's the Sawbird or something else, it is important to make sure that no current gets where it's not supposed to. Normally a short circuit on the coaxial cable only disrupts the received signal, but when Bias-Tee power is used it has a potential of damaging the SDR. On the other hand, when external power is used for the LNA, measures need to be taken to prevent current flowing from the LNA into the SDR. Some LNAs (such as the common SPF5189z boards) have DC-isolated RF connectors so this isn't an issue, but something like the Sawbird has been proven to leak current into the RF output port and into the SDR, meaning that a separate DC block has to be added on the input of the SDR. Consider this whole paragraph a disclaimer; always double-check your connections and refer to a datasheet of your SDR and LNA to make sure whatever setup you are using won't be damaged.
 
 ## 2.4 Dish reflector
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.5 Dish feed](#25-dish-feed)
 
 The dish reflector is the core part of a HRPT setup, as that directly dictates how strong the received signal is and how difficult it is to track the satellite. A larger diameter will provide higher gain but also a narrower beam. In turn, a narrower beam makes it more difficult to track the satellite, but it also has better selectivity and potentially lowers the amount of unwanted signals being received. The dish size recommended by official HRPT documentation is up to 2 meters, however for amateur use a typical 70 - 80cm offset dish is perfectly usable.
@@ -138,7 +138,7 @@ Depending on where you live there may be different types of dishes readily avail
 You may also be familiar with WiFi grid reflector dish antennas that are often reused for HRIT reception, which happens to be in the same frequency range as HRPT. And indeed such an antenna would also be usable for HRPT, provided that it is big enough. The grids are often elliptical or rectangle-shaped, so to match the gain of an 80cm offset dish you would need something like a 100cm wide grid. I personally would go with a smaller dish rather than a larger grid, although the grids do provide lower wind loading and already come with a feed that can be easily modified to work around 1.7 GHz (same way as its done for HRIT reception), or in some cases the 2.4 GHz WiFi feed may work without mods. Do keep in mind though that the stock grid dish feeds are linearly polarized, which will result in lower gain when used for HRPT reception (not an issue with HRIT which is also linear). More details in the next section;
 
 ## 2.5 Dish feed
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.5.1 Reflector](#251-reflector)  
 [⇊ 2.6 Example Setup](#26-example-setup)
 
@@ -157,13 +157,13 @@ There is however another feed type, very commonly used for HRPT reception, that 
 The helical feed consists of only two wavelength-dependent parts; the reflector and helix itself. These can be as simple as a thin sheet of metal and solid-core copper wire.
 
 ### 2.5.1 Reflector
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.5.2 Helix](#252-helix)
 
 The reflector should be at least the size of 3/4 of a wavelength. In case of 1.7 GHz that is around 13cm, meaning that a valid reflector can be a square with each side at least 13cm long, or a circle with at least 13cm diameter. For example, a 13cmx13cm square of sheet aluminium or copper will work just fine. Sheet iron can be used as well, as you can easily obtain that from old electrical appliances (like microwaves, computer cases, ...), although it can rust over time without additional protection.
 
 ### 2.5.2 Helix
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.5.3 Connector and Matching](#253-connector-and-matching)
 
 The helix is a spiral of wire with a diameter of wavelength/Pi, or 56mm for 1.7 GHz. The number of turns and the spacing between them depends on the desired beam width of the helix. A helix should have at least 3 turns to even have the characteristics of a helix, with around 16 turns being the highest practical number, but the number of turns needed to feed a dish depends on the illumination angle of the particular dish as well as the chosen turn spacing.
@@ -188,7 +188,7 @@ I will also mention that if you own or have access to a 3D printer you can print
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/hrpt-guide/helical-feeds.png?raw=true)
 
 ### 2.5.3 Connector and matching
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.5.4 Mounting](#254-mounting)
 
 Once you have both the helix and the reflector ready, you will have to attach them together using a connector. The type of connector doesn't really matter as long as you can acquire the necessary adapters to connect it to the LNA and subsequently the SDR. Something like a "panel mount" female SMA connector would probably be the most ideal, as it only requires one hole to be drilled and can be connected to the rest of the setup through a male-male SMA adapter (which is cheap and even comes for free with the Nooelec Sawbird). The center pin of the connector is where the helical conductor is soldered, while the outer part has to make good electrical contact with the reflector (ground) plate. Below are two illustrations from the ARRL Antenna Book showing how the connector should be attached to the plate and helix while achieving a good impedance match;
@@ -201,14 +201,14 @@ I also put the connectors on my feeds in the center of the helix and reflector, 
 Basically, to reiterate, a receive-only helix is very forgiving in its construction, so you generally have a lot of freedom when it comes to the mounting and feeding configuration you use.
 
 ### 2.5.4 Mounting
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 2.6 Example setup](#26-example-setup)
 
 After fully assembling the helical feed, you also have to come up with a way to mount it on the dish. In an ideal setup, the phase center of the helical feed should be aligned with the focal point of the dish. You can easily locate this point by looking at where the entrance of the LNB waveguide would be placed. That point should roughly overlap with the center of the first turn of the helix. Note that on 1.7 GHz the focal point alignment doesn't require *that much* precision. This is especially helpful because the reflector of a helical feed will usually not fit on the dish arm perfectly (as denoted by the red marks on the following illustrations), so it will need to be offset slightly above it in many cases (as seen in the next section). The following image also shows three examples of offset dishes with different feed arm shapes - while all of them can be used for HRPT just fine, the first one is the least suited to hold the helical feed while the last one has the most clearance to fit the reflector.
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/hrpt-guide/feed-placement.png?raw=true)
 ## 2.6 Example setup
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 3. Tracking](#3-tracking)
 
 Overall there isn't one "good" way to mount the feed, and I haven't even touched on how and where to mount the dish itself so that it can freely spin around in both azimuth and elevation axes, as there simply are way too many possibilities to cover. So I figured the best thing I could do would be presenting some already existing and working setups for HRPT reception.
@@ -236,7 +236,7 @@ You can see the that the reflector of the linear feed has been flipped around, t
 Keep in mind though that a grid antenna like this with a linear feed will suffer from a slight polarization mismatch loss (around 3dB for a linear/RHCP mismatch), although the generally better construction and matching will make up for the loss to some extent. Whatever the real loss is, it doesn't seem to be too bad (with a big enough reflector) as Victor has proven.
 
 # 3. Tracking
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 3.1 Tracking software](#31-tracking-software)  
 [⇊ 4. Decoding](#4-decoding)
 
@@ -251,7 +251,7 @@ NOAA-15 also seems to have many nulls in the radiation pattern of its HRPT anten
 Hand-tracking fast-moving space satellites with a very high gain antenna is a skill that will take some time and practice to develop, and it is something that I have yet to master myself (as evident on the example images). You will most likely end up with rather bad results on your first couple tries, but it is important to not be discouraged. For example  if you make a tracking mistake in an otherwise good pass don't just quit tracking, even if the resulting image quality will be poor you can still use the rest of the pass to practice your tracking so that it won't be as likely to happen next time.
 
 ## 3.1 Tracking software
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 3.1 HRPT Frequencies](#31-hrpt-frequencies)
 
 Prediction of the passes is the same as you may already be used to with APT, LRPT, or ham radio satellites. It is however important to note that some satellite tracking apps may not include the full HRPT fleet by default as it simply isn't what people usually want to track. This is why I recommend using software that lets you define your own TLE sources. For Windows, Linux, and MacOS I would suggest using gpredict, but I also find it much more convenient to have the tracking info on a separate screen on my smartphone instead (depends on personal preference), so for Android I recommend using [Look4sat](https://play.google.com/store/apps/details?id=com.rtbishop.look4sat&hl=en&gl=US) (with all the "fancy" features such as the radar screen effect and compass disabled). Sadly I myself can't give any advice on app selection for iOS because I'm way too poor for that.
@@ -260,7 +260,7 @@ Just a note on Look4sat though - it downloads satellite frequency information fr
 
 ## 3.2 HRPT frequencies
 
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 4. Decoding](#4-decoding)
 
 As of December 13, 2021, the frequencies used for HRPT dissemination by the currently active satellites are;
@@ -275,7 +275,7 @@ As of December 13, 2021, the frequencies used for HRPT dissemination by the curr
 * FengYun-3C: 1701.4 MHz
 
 # 4. Decoding
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 4.1 Recording](#41-recording)  
 [⇊ 5. Conclusion](#5-conclusion)
 
@@ -288,7 +288,7 @@ There are four main "stages" that I would divide the decoding process into;
 Depending on the software of choice the process and results will differ.
 
 ## 4.1 Recording
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 4.2 Decoding](#42-decoding)
 
 Today's HRPT software offers the ability to demodulate the signal directly as it comes off the SDR, meaning that this step can be skipped. This is what's commonly referred to as the "realtime" decoding method. However, I strongly suggest you start off with the "offline" method. This involves first recording the HRPT signal using appropriate software. A few examples include;
@@ -322,7 +322,7 @@ Also following are screenshots of the SDR# FFT display showing the HRPT signals 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/hrpt-guide/hrpt-all.jpeg?raw=true)
 
 ## 4.2 Decoding
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 4.3 Post-processing](#43-post-processing)
 
 Currently there are only two programs that I would recommend for people starting out with HRPT reception;
@@ -336,7 +336,7 @@ LeanHRPT is divided into two separate apps; Demod and Decode that each do exactl
 The usage of each program is different so refer to their respective readmes and wiki pages to learn more (and also get the up-to-date information that I can't possibly include here). Note that both are very new (compared to "classic" software like *XHRPT* or *MetFy3X/HRPT Reader*), so their functionality and feature sets will likely change in the future.
 
 ## 4.3 Post-processing
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 5. Conclusion](#5-conclusion)
 
 For HRPT image post-processing I will however solely recommend [LeanHRPT-Decode](https://github.com/Xerbo/LeanHRPT-Decode/) *(and not just because I've contributed some composite definitions to it)*. LeanHRPT can read intermediary files from satdump's demodulator, so it is possible to use satdump for demodulation and LeanHRPT for decoding and post-processing, making it possible to get the best of both worlds in the case of low-sps MetOp.
@@ -350,7 +350,7 @@ To learn how to use LeanHRPT-Decode, once again, see the [wiki](https://github.c
 # 5. Conclusion
 
 ## 5.1 Possible improvements
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 5.2 Future of HRPT](#52-future-of-hrpt)
 
 While this guide has mainly been focused on a "minimalist" beginner setup, there are many ways it could be improved upon to get better and more consistent results (all of course requiring additional effort and investment).
@@ -368,7 +368,7 @@ Increasing the dish diameter is the most obvious and straight-forward improvemen
 One last thing that comes to mind would be experimenting with a differently shaped reflector of the helical feed. It may be possible to use a conical or an otherwise shaped reflector to decrease the amount of noise and interference picked up by the helix, this is something I want to experiment with in the future so stay tuned for updates. This could have the effect of increasing the signal-to-noise ratio not by increasing the signal, but instead by reducing the noise.
 
 ## 5.2 Future of HRPT
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 5.3 Beyond 1.7 GHz](#53-beyond-17-ghz)
 
 While HRPT is a big step-up in quality, resolution and number of available satellites when compared to APT and LRPT, the fact of the matter is that even HRPT is already being phased out.
@@ -380,7 +380,7 @@ MetOp too has completely dropped HRPT, with the upcoming MetOp-SG constellation 
 The Meteor-M constellation is the only one with scheduled future launches that have a high probability of including not only HRPT but also LRPT. But just like most other Russian satellites, Meteor-M launches have been plagued with complications and delays, with Meteor-M N2-3 currently being planned for a launch not earlier than December 2022.
 
 ## 5.3 Beyond 1.7 GHz
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 [↓ 5.4 Actual conclusion](#54-actual-conclusion)
 
 Even though the number of active HRPT satellites is only set to decrease as time goes by, direct reception of weather satellite imagery still hasn't been cancelled fully. All of the HRPT satellites have instead transitioned their broadcasts into the X-band - a part of the radio spectrum in the 7 - 10 GHz range.
@@ -392,7 +392,7 @@ But if you think that spending 121 EUR on just a HRPT feed is way too much then 
 I myself would like to experiment with X-band reception at some point, but just like getting a rotator it is something way outside my budget.
 
 ## 5.4 Actual conclusion
-[⇈ Table of contents](#0-table-of-contents)  
+[⇈ Table of contents](#table-of-contents)  
 
 While I hoped to make this guide much more detailed and specific, I decided to cut a few corners and leave some things more open-ended as you may have noticed. That is because I've already tried making a much more in-depth write-up before, however I was never able to finish it due to it getting way too convoluted and outright confusing, but I hope this was still helpful to you in some ways.
 
