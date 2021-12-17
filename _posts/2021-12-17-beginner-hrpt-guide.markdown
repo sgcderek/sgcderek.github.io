@@ -252,7 +252,7 @@ Hand-tracking fast-moving space satellites with a very high gain antenna is a sk
 
 ## 3.1 Tracking software
 [⇈ Table of contents](#table-of-contents)  
-[↓ 3.1 HRPT Frequencies](#31-hrpt-frequencies)
+[↓ 3.2 HRPT Frequencies](#32-hrpt-frequencies)
 
 Prediction of the passes is the same as you may already be used to with APT, LRPT, or ham radio satellites. It is however important to note that some satellite tracking apps may not include the full HRPT fleet by default as it simply isn't what people usually want to track. This is why I recommend using software that lets you define your own TLE sources. For Windows, Linux, and MacOS I would suggest using gpredict, but I also find it much more convenient to have the tracking info on a separate screen on my smartphone instead (depends on personal preference), so for Android I recommend using [Look4sat](https://play.google.com/store/apps/details?id=com.rtbishop.look4sat&hl=en&gl=US) (with all the "fancy" features such as the radar screen effect and compass disabled). Sadly I myself can't give any advice on app selection for iOS because I'm way too poor for that.
 
