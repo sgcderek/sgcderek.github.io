@@ -1,4 +1,11 @@
-﻿# Table of contents
+﻿---
+layout: post
+title:  "Beginner's guide to HRPT reception"
+description:
+date:   2021-12-17
+categories: 
+---
+ # Table of contents
 
 1. [Introduction](#1-introduction)
 1.1 [Below 1.7 GHz](#11-below-17-ghz)
