@@ -50,7 +50,8 @@ When the relayed signal is received, the total free space path traveled by it on
 Even when the satellite is aligned with the TV tower, the relayed signal strength is far from great. For example, even during its peak strength moment, I couldn't see even a tiny trace of the SECAM color signal carrier, though the FM audio became perfectly clear at times and the brightness (black and white) signal carrier got loud enough that a basic picture appeared in a real-time decoder I was using.
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/meridian-tv-fft.png?raw=true)
-*Image above: FFT/waterfall screenshot of the SECAM black and white video carrier signal relayed by Meridian*
+
+*Image above: FFT/waterfall screenshot of the SECAM black and white video signal relayed by Meridian*
 
 As described earlier, the "advantage" of analog over digital, at least in this case, is that even though the majority of the 6.5 MHz wide signal was still way below the noise floor for me, at least the brightness signal was well above it. If this was a digital broadcast, I would have needed the entire signal to be at least a few dB above noise, plus an entire DVB-T(2) channel multiplex would likely be too wide for the transponder anyway.
 
@@ -66,11 +67,13 @@ Note that the decoder currently completely omits any video sync, instead simply 
 The 990 MHz Meridian transponder isn't particularly strong, requiring a high-gain antenna for it to be copied successfully. I used a 2.5 meter offset dish with a LHCP helical feed tuned to 995 MHz (Meridian is RHCP, dish inverts polarization). Right after the feed was a 990 - 1000 MHz LNA, custom-made for me by teroz.cz. I already tried receiving this transponder about a year ago, but without this filtered LNA my receiver was overwhelmed by nearby cellular network signals. Speaking of which, I used a HackRF SDR as the receiver, though just an RTL-SDR V3 or an equivalent would suffice. In fact I used the Nooelec NESDR SMArt V4 alongside the HackRF during my latest reception attempt, with the HackRF recording video and the NESDR recording audio (easier for me than having HackRF record the full bandwidth on its own).
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/big-dish.jpeg?raw=true)
+
 *Image above: The 2.5m offset dish I used to receive Meridian. Note that it is mounted upside down to enable reception of distant low-elevation satellites*
 
 The feed arm of my dish is very high above the ground, forcing me to use several meters of coax between the LNA output and the SDR input, so to make sure all of it gets though I also use a cheap off the shelf satellite TV line amplifier that I modified to accept and pass through 5V bias-tee power. This will most likely not be necessary if you use short coax and/or a higher gain LNA (I ordered mine with a lower gain option on purpose since I knew I would pair it up with the line amp).
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/meridian-feed.jpeg?raw=true)
+
 *Image above: Photo of my Meridian 990 MHz feed assembly*
 
 A smaller antenna would most likely also work to receive signals from this transponder. In fact, during his original discovery, Scott Tilley simply used a small omnidirectional RHCP helix aimed at the sky. While this won't be enough to realistically decode anything, it will be satisfactory for those who wish to simply monitor the overall activity of the transponder. Going a step higher and using a larger directional helix aimed at the satellite might be able to provide you with good results, although I personally haven't seen anyone copy any individual signals on the 990 MHz transponder with an antenna smaller than a 2m dish. If you do, please share your achievement and tag me!
@@ -80,11 +83,13 @@ A smaller antenna would most likely also work to receive signals from this trans
 As mentioned earlier, TV broadcasting from Turkmenistan is only one of the many things you can hear on this transponder. Scott Tilley has been detecting signals consistent with UHF radar emissions from the currently besieged country of Ukraine, and due to the uplink band used it is common to see other broadcast and cellular signals appearing every so often. The transponder also has its actual intended use by the Russian military which I will not speculate about here, though once again Scott Tilley has published an extensive analysis of just that if you are interested.
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/990-transponder-mobile.png?raw=true)
+
 *Image above: Meridian 990 MHz transponder downlink relaying two wide digital signals*
 
 The 990 MHz transponder also isn't the only one used by the Meridian satellites. Depending on the individual spacecraft, it can use a combination of transponders with downlinks including 278 MHz, 484 MHz, 990 MHz, and higher frequencies in the C-band and the X-band. Particularly the 278 and 484 MHz ones might be of interest to you, as those can be received with a much more conveniently-sized antenna and very often carry some interesting traffic, including amateur radio repeaters or air traffic control. Just like the 990 MHz downlinks though, the 278 and 484 MHz ones can be easily overpowered by your local broadcast signals. While I managed to receive the 278 MHz one, I am out of luck when it comes to 484 MHz as a DVB-T2 channel multiplex decided to settle right on that frequency.
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/vhf-transponder-fft.png?raw=true)
+
 *Image above: The VHF Meridian transponder downlink, showing many short narrow-band signals as well as what appears to be a wider channel and an FM radio station*
 
 If you do manage to consistently receive one of the transponders, no matter which one, it will enable you to basically listen to a part of the radio spectrum anywhere in the Northern hemisphere, as long as you time your listening sessions properly, keeping in mind the required satellite alignment I described using the Turkmen TV tower as an example. As far as terrestrial transmitters go, whichever ones are near the satellite's footprint will have a higher likelihood of being picked up by it and relayed. Of course there will be many exceptions, but it is a good general rule of thumb. Of course a ground-based transmitter has to be strong enough in order to be picked up by the satellite in the first place.
