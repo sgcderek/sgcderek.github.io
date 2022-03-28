@@ -68,7 +68,7 @@ The 990 MHz Meridian transponder isn't particularly strong, requiring a high-gai
 
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/big-dish.jpeg?raw=true)
 
-*Image above: The 2.5m offset dish I used to receive Meridian. Note that it is mounted upside down to enable reception of distant low-elevation satellites*
+*Image above: The 2.5m offset dish I used to receive Meridian. Note that it is mounted upside down to enable reception of distant low-elevation satellites. This isn't needed for Meridian since they spend most of their time high above the North pole*
 
 The feed arm of my dish is very high above the ground, forcing me to use several meters of coax between the LNA output and the SDR input, so to make sure all of it gets though I also use a cheap off the shelf satellite TV line amplifier that I modified to accept and pass through 5V bias-tee power. This will most likely not be necessary if you use short coax and/or a higher gain LNA (I ordered mine with a lower gain option on purpose since I knew I would pair it up with the line amp).
 
