@@ -88,6 +88,8 @@ As mentioned earlier, TV broadcasting from Turkmenistan is only one of the many 
 
 The 990 MHz transponder also isn't the only one used by the Meridian satellites. Depending on the individual spacecraft, it can use a combination of transponders with downlinks including 278 MHz, 484 MHz, 990 MHz, and higher frequencies in the C-band and the X-band. Particularly the 278 and 484 MHz ones might be of interest to you, as those can be received with a much more conveniently-sized antenna and very often carry some interesting traffic, including amateur radio repeaters or air traffic control. Just like the 990 MHz downlinks though, the 278 and 484 MHz ones can be easily overpowered by your local broadcast signals. While I managed to receive the 278 MHz one, I am out of luck when it comes to 484 MHz as a DVB-T2 channel multiplex decided to settle right on that frequency.
 
+[2022-03-28] As of today, only Meridian 8 and Meridian 9 have an active 990 MHz transponder downlink. Meridian 10 launched just a few days ago and might soon also activate it.
+
 ![](https://github.com/sgcderek/sgcderek.github.io/blob/main/images/receiving-meridian-tv/vhf-transponder-fft.png?raw=true)
 
 *Image above: The VHF Meridian transponder downlink, showing many short narrow-band signals as well as what appears to be a wider channel and an FM radio station*
