@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>NOAA-2 returning from the dead</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<style>
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('https://sgcderek.github.io/html-test/M1font_small.ttf')  format('truetype');
+}
+* {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  text-align: left;
+  font-family: MyWebFont;
+}
+a:link {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddbf8;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style> 
+</head>
+<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%">
+<h1 style="color:#c0ce43;">NOAA-2 returning from the dead</h1>
+<p><i>15 March 2021</i></p>
+<p><a href="../index.html">[Back to the main page]</a></p>
+
+<hr class="solid">
+
+<p>A few days ago, a long-time amateur radio satellite watcher Scott Tilley <a href="https://twitter.com/coastal8049/status/1370568925386215428" target="_blank" rel="noopener">announced on Twitter</a> that his automated L-Band receiver detected signal emissions from the old NOAA-2 satellite.</p>
+<p>This satellite, also known as ITOS-D prior to its NOAA classification, was launched in 1972. It had operated until early 1975, after which it was decommissioned by NOAA and effectively considered &ldquo;dead&rdquo;.</p>
+
+<p><img src="https://github.com/sgcderek/sgcderek.github.io/blob/main/images/ITOS-TIROS-comp.png?raw=true" width="50%"/></p>
+
+<p>The image above shows the difference between the old generation NOAA-2 (left) and the "new" NOAA-19 (right).</p>
+
+<p>It is not too uncommon for old decommissioned satellites to start transmitting a signal again, you may be familiar with a similar phenomenon that&rsquo;s happened to Transit 5B-5 or NOAA-9, and plenty other satellites. Happysat has a <a href="http://happysat.nl/Deadsat/Gallery.html" target="_blank" rel="noopener">page on his blog</a> documenting emissions like this, but note that it&rsquo;s now out of date and the satellites shown there may no longer be active.</p>
+<p>[2021-03-19] Happysat got in touch and said that he may soon be revisiting his lists of historical satellites still broadcasting, so make sure to go check out his blog after this!</p>
+<p>However what differentiates NOAA-2&rsquo;s newfound signal from NOAA-9&rsquo;s is the fact that the hardware responsible for encoding and modulating it still seems to be operational. This is similar to the already mentioned Transit 5B-5, in fact you may remember a recent <a href="https://xerbo.net/posts/investigating-transit-pt1/" target="_blank" rel="noopener">blog post</a> from Xerbo about the analysis and subsequent decoding of the Transit signal, that has revealed unmistakable patterns in the binary data such as a frame counter.</p>
+<p>After seeing Scott&rsquo;s tweet, I have decided to use my own setup to attempt recording the signal;</p>
+
+<p><img src="https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-waterfall.png?raw=true" width="50%"/></p>
+
+<p>The signal is being broadcast from NOAA-2 at 1697.5 MHz, so far it seems like it is active for about 30 seconds which is then followed by about a minute long period of silence. I received the signal shown above during daylight, and it is safe to assume that it would not be broadcast at night when the satellite&rsquo;s solar panels aren&rsquo;t receiving power, however this still hasn&rsquo;t been confirmed.</p>
+<p>Modern satellites still use the same frequency band, in fact NOAA-19 can be found transmitting its own digital HRPT signal at 1698 MHz.</p>
+<p>However, NOAA-2 predates digital HRPT as that was first used on NOAA-5 during the bus transition from ITOS to TIROS (a similar bus to that on which the three current NOAA/POES satellites are based).</p>
+<p>NOAA satellites before HRPT used what essentially is high-rate APT; an FM audio transmission containing the selected instrument data in an analog format. Unlike APT though, this signal wouldn&rsquo;t have an interesting sound to it, as the actual subcarrier frequency is above the normal audible range. This is similar to how broadcast FM radio stations encode additional data in their signal, such as stereo audio and the digital RDS stream.</p>
+<p>In contrast, the subcarrier frequency of APT is 2.4 kHz, which is responsible for its recognizable sound.</p>
+<p>Just like with Transit 5B-5 before, Xerbo took a closer look at the signal that NOAA-2 started broadcasting, and after a while <a href="https://twitter.com/Xerbo10/status/1370865781949485056" target="_blank" rel="noopener">it became obvious that the satellite wasn&rsquo;t as dead as it seemed</a>. After we looked through some of the old documentation, it was also revealed that the constant pattern that NOAA-2 is transmitting now partially matches the voltage calibration and sync <a href="https://twitter.com/ok9sgc/status/1370885888725684226" target="_blank" rel="noopener">as described</a>.</p>
+<p>After experimenting with the signal, Xerbo was able to determine how it is modulated, and extracted what would have been an Earth image if the satellite was still fully operational.</p>
+
+<p><img src="https://github.com/sgcderek/sgcderek.github.io/blob/main/images/NOAA2-HRPT-image.png?raw=true" width="100%"/></p>
+
+<p>On the image above you can see a crop of the sync (2 vertical lines) and voltage calibration ramp. The empty grey/black parts are where the image would have been. This is similar to the calibration stripes that you may be familiar with from APT images. Basically it could be said that NOAA-2 is broadcasting &ldquo;blank APT&rdquo;.</p>
+<p>As mentioned though this isn&rsquo;t actual APT, although this satellite did have an APT payload. Following is a table containing the original frequencies this satellite was able to broadcast on. Note that so far only the L-Band link was observed active (and is the source of the &ldquo;image&rdquo; decoded above). There have been a few attempts to identify other emissions around 136 - 138 MHz but so far nothing has been found.</p>
+
+<table>
+<thead>
+<tr>
+<th>Link&nbsp;&nbsp;&nbsp;</th>
+<th>Frequency (MHz)&nbsp;&nbsp;&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beacon&nbsp;&nbsp;&nbsp;</td>
+<td>136.77&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>VHF Real-time&nbsp;&nbsp;&nbsp;</td>
+<td>137.50&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>VHF Real-time (backup)&nbsp;&nbsp;&nbsp;</td>
+<td>137.62&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td>L-Band Real-time/playback&nbsp;&nbsp;&nbsp;</td>
+<td>1697.50&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</tbody>
+</table>
+
+<p>It is not known when exactly NOAA-2 started transmitting this signal, however given the strength of the carriers included in the signal and its proximity in frequency to other satellites such as NOAA-19, METEOR-M N2/N2-2 or ARKTIKA-M N1, we can conclude that it must have been a recent revival as it would not take long to notice it.</p>
+<p>It is also not known how long the satellite will stay alive. It may become a new longtime member of the historic fleet alongside the likes of Transit 5B-5, NOAA-9, or FengYun-1D, or it may shut off any second now remaining silent forever&hellip;</p>
+<p>The baseband containing my signal can be downloaded <a href="https://cloud.xerbo.net/s/PnSWL9TGmMFZJtF" target="_blank" rel="noopener">here</a>. Thanks again to Xerbo for taking his time to decode this and hosting the baseband recording on his server.</p>
+
+<p><a href="../index.html">[Back to the main page]</a></p>
+</body>
+</html>
