@@ -1,39 +1,52 @@
----
-title: Page Not Found
-permalink: /404.html
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	{%- include head.html -%}
-	<style>
-	h1 {
-		background-color: #eee;
-		width: 220px;
-		height: 220px;
-		border-radius: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center
-	}
-	body {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		font-size: 20px;
-		height: 80vh;
-	}
-	p {
-		font-size: 1.5em;
-		text-align: center;
-		margin: 0;
-		line-height: 2em;
-	}
-	</style>
+<title>404</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<style>
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('M1font_small.ttf')  format('truetype');
+}
+* {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  text-align: center;
+  font-family: MyWebFont;
+}
+a:link {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddbf8;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style> 
 </head>
-<body>
-	<h1>404</h1>
-	<p>Page not found.</p><a href=".">Return to start page</a>
+<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%">
+
+<h1 style="color:#c0ce43;">404</h1>
+
+<p>The page you are looking for does not exist.</p>
+<p>It might have been renamed or moved - check that your URL is correct.</p>
+<p>If you followed an external link that doesn't work anymore, go to the <a href="index.html">home page</a> and see if you can find what you are looking for.</p>
 </body>
 </html>
