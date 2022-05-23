@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Helical antenna calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<style>
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('../M1font_small.ttf')  format('truetype');
+}
+* {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+  text-align: left;
+  font-family: MyWebFont;
+}
+a:link {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #7199ea;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddbf8;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style> 
+</head>
+<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%">
+<h1 style="color:#c0ce43;">Helical antenna calculator</h1>
+<p><a href="../index.html">[Back to the main page]</a></p>
+<hr class="solid">
+
+<p>This is a simple helical antenna calculator that I've been using for my antennas and dish feeds, originally I had it only in a private spreadsheet document. It is based on the book "Antennas For All Applications" by John D. Kraus and Ronald J. Marhefka and the "ARRL Antenna Book".</p>
+<p>Scroll below the calculator to see more information about how to properly build a helix as well as explanations of its individual properties.</p>
+<p>The three user input values are repeated in the output just for the purpose of confirmation that your latest input was submitted correctly.</p>
+
+<hr class="solid">
+
+<script>
+function calculate(form) {
+	with(Math){
+	
+		form.confirmMHz.disabled = false;
+		form.confirmSpacing.disabled = false;
+		form.confirmTurns.disabled = false;
+		form.outputWavelength.disabled = false;
+		form.outputSpacing.disabled = false;
+		form.outputCircumference.disabled = false;
+		form.outputDiameter.disabled = false;
+		form.outputSpacing.disabled = false;
+		form.outputAxialLength.disabled = false;
+		form.outputPitch.disabled = false;
+		form.outputTurnLength.disabled = false;
+		form.outputConductorLength.disabled = false;
+		form.outputConductorDiameter.disabled = false;
+		form.outputReflectorMax.disabled = false;
+		form.outputReflectorMin.disabled = false;
+		
+		// Operating frequency of the helix in MHz
+		var frequency = Number(form.inputMHz.value);
+		
+		// Turn spacing of the helix in wl
+		var spacing = Number(form.inputSpacing.value);
+		
+		// Number of turns of the helix
+		var turns = Number(form.inputTurns.value);
+		
+		// Copy inputs to confirmation fields
+		form.confirmMHz.value = frequency;
+		form.confirmSpacing.value = spacing;
+		form.confirmTurns.value = turns;
+		
+		// Operating wavelength of the helix in mm
+		var wavelength = round( 299792458/frequency/1000 *10) / 10
+		form.outputWavelength.value = wavelength;
+		
+		// Turn spacing of the helix in mm
+		var spacingMM = Number(spacing*wavelength)
+		form.outputSpacing.value = round( spacingMM*1.0 *10) / 10;
+		
+		// Circumference of the helix in wl (nominally just 1)
+		var circumference = round( wavelength*1.0 *10) / 10;
+		form.outputCircumference.value = circumference;
+		
+		// Diameter of the helix in mm
+		var diameter = round( wavelength/PI *10) / 10;
+		form.outputDiameter.value = diameter;
+		
+		// Total length of the helix in mm
+		var axialLength = round( turns*spacingMM *10) / 10;
+		form.outputAxialLength.value = axialLength;
+		
+		var pitchAngle = round( (atan(spacingMM/wavelength))*180/PI *10) / 10; //TODO
+		form.outputPitch.value = pitchAngle;
+		
+		// Length of conductor in 1 turn in mm
+		var turnLength = round( sqrt(spacingMM*spacingMM + circumference*circumference) *10) / 10;
+		form.outputTurnLength.value = turnLength;
+		
+		// Total lengt of conductor in mm
+		var conductorLength = round( turnLength*turns *10) / 10;
+		form.outputConductorLength.value = conductorLength;
+		
+		// Ideal diameter of conductor in mm
+		var conductorDiameter = round( wavelength*0.02 *100) / 100;
+		form.outputConductorDiameter.value = conductorDiameter;
+
+		// Min diameter of reflector in mm
+		var reflectorMin = round( wavelength*0.75 *10) / 10;
+		form.outputReflectorMin.value = reflectorMin;
+		
+		// Max diameter of reflector in mm
+		var reflectorMax = round( wavelength*1.1 *10) / 10;
+		form.outputReflectorMax.value = reflectorMax;
+		
+		form.confirmMHz.disabled = true;
+		form.confirmSpacing.disabled = true;
+		form.confirmTurns.disabled = true;
+		form.outputWavelength.disabled = true;
+		form.outputSpacing.disabled = true;
+		form.outputCircumference.disabled = true;
+		form.outputDiameter.disabled = true;
+		form.outputSpacing.disabled = true;
+		form.outputAxialLength.disabled = true;
+		form.outputPitch.disabled = true;
+		form.outputTurnLength.disabled = true;
+		form.outputConductorLength.disabled = true;
+		form.outputConductorDiameter.disabled = true;
+		form.outputReflectorMax.disabled = true;
+		form.outputReflectorMin.disabled = true;
+
+	}
+}
+</script>
+
+<form method="POST" name="Values">
+<table border="1">
+
+<tr>
+<td>F</td>
+<td>user input</td>
+<td><input id="inputMHz" type="number" size=10 placeholder="1700"></td>
+<td>MHz</td>
+<td>Operating frequency</td>
+</tr>
+
+<tr>
+<td>S<sub>λ</sub></td>
+<td>user input</td>
+<td><input id="inputSpacing" type="number" size=10 placeholder="0.2"></td>
+<td>λ</td>
+<td>Spacing between turns</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>user input</td>
+<td><input id="inputTurns" type="number" size=10 placeholder="5"></td>
+<td></td>
+<td>Number of turns</td>
+</tr>
+
+<tr>
+<td><input id="buttonSubmit" type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
+</tr>
+
+<tr>
+<td>F</td>
+<td>user input</td>
+<td><input id="confirmMHz" type="number" size=10 disabled></td>
+<td>MHz</td>
+<td>Operating frequency</td>
+</tr>
+
+<tr>
+<td>S<sub>λ</sub></td>
+<td>user input</td>
+<td><input id="confirmSpacing" type="number" size=10 disabled></td>
+<td>λ</td>
+<td>Spacing between turns</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>user input</td>
+<td><input id="confirmTurns" type="number" size=10 disabled></td>
+<td></td>
+<td>Number of turns</td>
+</tr>
+
+<tr>
+<td>λ</td>
+<td>= c/F/1000</td>
+<td><input id="outputWavelength" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Operating wavelength</td>
+</tr>
+
+<tr>
+<td>C</td>
+<td>= λ*1.0</td>
+<td><input id="outputCircumference" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Helix circumference</td>
+</tr>
+
+<tr>
+<td>D</td>
+<td>= C/π</td>
+<td><input id="outputDiameter" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Helix diameter</td>
+</tr>
+
+<tr>
+<td>S</td>
+<td>= λ*S<sub>λ</sub></td>
+<td><input id="outputSpacing" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Spacing between turns</td>
+</tr>
+
+<tr>
+<td>A</td>
+<td>= n*S</td>
+<td><input id="outputAxialLength" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Height of helix (axial length)</td>
+</tr>
+
+<tr>
+<td>α</td>
+<td>= atan(S/C)</td>
+<td><input id="outputPitch" type="number" size=10 disabled></td>
+<td>deg</td>
+<td>Pitch angle</td>
+</tr>
+
+<tr>
+<td>L<sub>t</sub></td>
+<td>= √(S²+C²)</td>
+<td><input id="outputTurnLength" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Length of 1 turn</td>
+</tr>
+
+<tr>
+<td>L<sub>h</sub></td>
+<td>= L<sub>t</sub>*n</td>
+<td><input id="outputConductorLength" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Total length of helix conductor</td>
+</tr>
+
+<tr>
+<td>d<sub></sub></td>
+<td>= λ*0.02</td>
+<td><input id="outputConductorDiameter" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Ideal diameter of helix conductor</td>
+</tr>
+
+<tr>
+<td>R<sub>min</sub></td>
+<td>= λ*0.75</td>
+<td><input id="outputReflectorMin" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Min. diameter of reflector</td>
+</tr>
+
+<tr>
+<td>R<sub>max</sub></td>
+<td>= λ*1.1</td>
+<td><input id="outputReflectorMax" type="number" size=10 disabled></td>
+<td>mm</td>
+<td>Max. diameter of reflector</td>
+</tr>
+
+</table>
+</form>
+
+<hr class="solid">
+
+<h2 style="color:#c0ce43;">Polarization</h2>
+
+<p>Depending on the way the helical conductor is wound, the resulting antenna will be either right-hand circularly polarized (RHCP) or left-hand circularly polarized (LHCP). A RHCP antenna will not be able to receive LHCP signals, while a LHCP antenna fails to receive RHCP. This is because of a theoretical infinite dB mismatch loss between RHCP and LHCP, although in the real world - where no antenna is perfect - even a RHCP helix will come with a (highly suppressed) LHCP component.</p>
+
+<p>The polarization of a helix can be determined by looking down one of its ends; if the conductor turns in a clockwise manner then the helix is RHCP, if it is counter-clockwise then it's LHCP. As this can at first be confusing to imagine, I have created an image illustrating the visual difference between the two polarizations;</p>
+
+<p><img src="../images/helix-calc/polarizations.jpeg" alt="" width="100%"></p>
+
+<hr class="solid">
+
+<h2 style="color:#c0ce43;">Usage as a dish feed</h2>
+
+<p>Continuing on the topic of polarization, one property of circularly polarized radio waves is that the polarization inverts when reflecting off a surface. This also includes the reflector of a dish antenna.</p>
+
+<p>When using a helical antenna as a dish feed, it is important to use a helix polarization that is the opposite of the signal you want to receive. For example, if you want to receive a RHCP signal with your dish feeding a helix, then the helix has to be LHCP.</p>
+
+<p><img src="../images/hrpt-guide/polarization.png" alt="" width="100%"></p>
+
+<p>In the rare case of a dish reflector with additional subreflectors (Gregorian, Cassegrainian), the correct polarization flip has to be considered for each subreflector.</p>
+
+<hr class="solid">
+
+<h2 style="color:#c0ce43;">Reflector</h2>
+
+<p>The R<sub>min</sub> and R<sub>max</sub> values refer to the range of optimal diameters for a theoretical circular reflector. In practice a square reflector is often used, in such case the R<sub>min</sub> and R<sub>max</sub> values define the range of the square side lengths.</p>
+
+<hr class="solid">
+
+<h2 style="color:#c0ce43;">Impedance</h2>
+
+<p>A helical antenna in a normal configuration has a high impedance of 150 - 300 ohms, depending on the pitch. Ideally this should be reduced close to 50 ohm to minimize the mismatch loss between the helix and the coaxial connector and cable. One simple way this can be done is by deforming a portion of the first turn so that its pitch gradually changes, from almost parallel to the reflector to the nominal pitch of the rest of the helix.</p>
+
+<p>Another common technique for helix impedance matching is adding a conductive strip to the first quarter turn, this increases the helix conductor's surface area and forms a "capacitor" with the reflector plate.</p>
+
+<p>An example of a helical antenna utilizing both methods can be seen below.</p>
+
+<p><img src="../images/helix-calc/matching.jpeg" alt="" width="50%"></p>
+
+<hr class="solid">
+
+<p><a href="../index.html">[Back to the main page]</a></p>
+</body>
+</html>
