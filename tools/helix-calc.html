@@ -162,12 +162,12 @@ function calculate(form) {
 </script>
 
 <form method="POST" name="Values">
-<table border="1">
+<table border="1" style='font-size:120%'>
 
 <tr>
 <td>F</td>
 <td>user input</td>
-<td><input id="inputMHz" type="number" size=10 value="1700"></td>
+<td><input id="inputMHz" style='font-size:120%' type="number" size=10 value="1700"></td>
 <td>MHz</td>
 <td>Operating frequency</td>
 </tr>
@@ -175,7 +175,7 @@ function calculate(form) {
 <tr>
 <td>S<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="inputSpacing" type="number" size=10 value="0.2"></td>
+<td><input id="inputSpacing" style='font-size:120%' type="number" size=10 value="0.2"></td>
 <td>λ</td>
 <td>Spacing between turns</td>
 </tr>
@@ -183,19 +183,19 @@ function calculate(form) {
 <tr>
 <td>n</td>
 <td>user input</td>
-<td><input id="inputTurns" type="number" size=10 value="5"></td>
+<td><input id="inputTurns" style='font-size:120%' type="number" size=10 value="5"></td>
 <td></td>
 <td>Number of turns</td>
 </tr>
 
 <tr>
-<td><input id="buttonSubmit" type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
+<td><input id="buttonSubmit" style='font-size:120%' type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
 </tr>
 
 <tr>
 <td>F</td>
 <td>user input</td>
-<td><input id="confirmMHz" type="number" size=10 disabled></td>
+<td><input id="confirmMHz" style='font-size:120%' type="number" size=10 disabled></td>
 <td>MHz</td>
 <td>Operating frequency</td>
 </tr>
@@ -203,7 +203,7 @@ function calculate(form) {
 <tr>
 <td>S<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="confirmSpacing" type="number" size=10 disabled></td>
+<td><input id="confirmSpacing" style='font-size:120%' type="number" size=10 disabled></td>
 <td>λ</td>
 <td>Spacing between turns</td>
 </tr>
@@ -211,7 +211,7 @@ function calculate(form) {
 <tr>
 <td>n</td>
 <td>user input</td>
-<td><input id="confirmTurns" type="number" size=10 disabled></td>
+<td><input id="confirmTurns" style='font-size:120%' type="number" size=10 disabled></td>
 <td></td>
 <td>Number of turns</td>
 </tr>
@@ -219,7 +219,7 @@ function calculate(form) {
 <tr>
 <td>λ</td>
 <td>= c/F/1000</td>
-<td><input id="outputWavelength" type="number" size=10 disabled></td>
+<td><input id="outputWavelength" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Operating wavelength</td>
 </tr>
@@ -227,7 +227,7 @@ function calculate(form) {
 <tr>
 <td>C</td>
 <td>= λ*1.0</td>
-<td><input id="outputCircumference" type="number" size=10 disabled></td>
+<td><input id="outputCircumference" style='font-size:120%' style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Helix circumference</td>
 </tr>
@@ -235,7 +235,7 @@ function calculate(form) {
 <tr>
 <td>D</td>
 <td>= C/π</td>
-<td><input id="outputDiameter" type="number" size=10 disabled></td>
+<td><input id="outputDiameter" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Helix diameter</td>
 </tr>
@@ -243,7 +243,7 @@ function calculate(form) {
 <tr>
 <td>S</td>
 <td>= λ*S<sub>λ</sub></td>
-<td><input id="outputSpacing" type="number" size=10 disabled></td>
+<td><input id="outputSpacing" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Spacing between turns</td>
 </tr>
@@ -251,7 +251,7 @@ function calculate(form) {
 <tr>
 <td>A</td>
 <td>= n*S</td>
-<td><input id="outputAxialLength" type="number" size=10 disabled></td>
+<td><input id="outputAxialLength" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Height of helix (axial length)</td>
 </tr>
@@ -259,7 +259,7 @@ function calculate(form) {
 <tr>
 <td>α</td>
 <td>= atan(S/C)</td>
-<td><input id="outputPitch" type="number" size=10 disabled></td>
+<td><input id="outputPitch" style='font-size:120%' type="number" size=10 disabled></td>
 <td>deg</td>
 <td>Pitch angle</td>
 </tr>
@@ -267,7 +267,7 @@ function calculate(form) {
 <tr>
 <td>L<sub>t</sub></td>
 <td>= √(S²+C²)</td>
-<td><input id="outputTurnLength" type="number" size=10 disabled></td>
+<td><input id="outputTurnLength" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Length of 1 turn</td>
 </tr>
@@ -275,7 +275,7 @@ function calculate(form) {
 <tr>
 <td>L<sub>h</sub></td>
 <td>= L<sub>t</sub>*n</td>
-<td><input id="outputConductorLength" type="number" size=10 disabled></td>
+<td><input id="outputConductorLength" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Total length of helix conductor</td>
 </tr>
@@ -283,7 +283,7 @@ function calculate(form) {
 <tr>
 <td>d<sub></sub></td>
 <td>= λ*0.02</td>
-<td><input id="outputConductorDiameter" type="number" size=10 disabled></td>
+<td><input id="outputConductorDiameter" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Ideal diameter of helix conductor</td>
 </tr>
@@ -291,7 +291,7 @@ function calculate(form) {
 <tr>
 <td>R<sub>min</sub></td>
 <td>= λ*0.75</td>
-<td><input id="outputReflectorMin" type="number" size=10 disabled></td>
+<td><input id="outputReflectorMin" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Min. diameter of reflector</td>
 </tr>
@@ -299,7 +299,7 @@ function calculate(form) {
 <tr>
 <td>R<sub>max</sub></td>
 <td>= λ*1.1</td>
-<td><input id="outputReflectorMax" type="number" size=10 disabled></td>
+<td><input id="outputReflectorMax" style='font-size:120%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Max. diameter of reflector</td>
 </tr>
