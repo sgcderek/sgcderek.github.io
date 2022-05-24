@@ -83,6 +83,9 @@ function calculate(form) {
 		form.outputConductorDiameter.disabled = false;
 		form.outputReflectorMax.disabled = false;
 		form.outputReflectorMin.disabled = false;
+		form.outputHPBW.disabled = false;
+		form.outputBWFN.disabled = false;
+		form.confirmCircumference.disabled = false;
 		
 		// Operating frequency of the helix in MHz
 		var frequency = Number(form.inputMHz.value);
@@ -93,10 +96,14 @@ function calculate(form) {
 		// Number of turns of the helix
 		var turns = Number(form.inputTurns.value);
 		
+		// Circumference in wavelengths
+		var circumferenceWl = Number(form.inputCircumference.value);
+		
 		// Copy inputs to confirmation fields
 		form.confirmMHz.value = frequency;
 		form.confirmSpacing.value = spacing;
 		form.confirmTurns.value = turns;
+		form.confirmCircumference.value = circumferenceWl;
 		
 		// Operating wavelength of the helix in mm
 		var wavelength = round( 299792458/frequency/1000 *10) / 10
@@ -107,7 +114,7 @@ function calculate(form) {
 		form.outputSpacing.value = round( spacingMM*1.0 *10) / 10;
 		
 		// Circumference of the helix in wl (nominally just 1)
-		var circumference = round( wavelength*1.0 *10) / 10;
+		var circumference = round( wavelength*circumferenceWl *10) / 10;
 		form.outputCircumference.value = circumference;
 		
 		// Diameter of the helix in mm
@@ -141,6 +148,14 @@ function calculate(form) {
 		var reflectorMax = round( wavelength*1.1 *10) / 10;
 		form.outputReflectorMax.value = reflectorMax;
 		
+		// Half power beamwidth in degrees
+		var HPBW = round( 52/(circumferenceWl*sqrt(turns*spacing)) *10) / 10;
+		form.outputHPBW.value = HPBW;
+		
+		// First null beamwidth in degrees
+		var BWFN = round( 115/(circumferenceWl*sqrt(turns*spacing)) *10) / 10;
+		form.outputBWFN.value = BWFN;
+		
 		form.confirmMHz.disabled = true;
 		form.confirmSpacing.disabled = true;
 		form.confirmTurns.disabled = true;
@@ -156,6 +171,9 @@ function calculate(form) {
 		form.outputConductorDiameter.disabled = true;
 		form.outputReflectorMax.disabled = true;
 		form.outputReflectorMin.disabled = true;
+		form.outputHPBW.disabled = true;
+		form.outputBWFN.disabled = true;
+		form.confirmCircumference.disabled = true;
 
 	}
 }
@@ -167,7 +185,7 @@ function calculate(form) {
 <tr>
 <td>F</td>
 <td>user input</td>
-<td><input id="inputMHz" style='font-size:120%' type="number" size=10 value="1700"></td>
+<td><input id="inputMHz" style='font-size:105%' type="number" size=10 value="1700"></td>
 <td>MHz</td>
 <td>Operating frequency</td>
 </tr>
@@ -175,7 +193,7 @@ function calculate(form) {
 <tr>
 <td>S<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="inputSpacing" style='font-size:120%' type="number" size=10 value="0.2"></td>
+<td><input id="inputSpacing" style='font-size:105%' type="number" size=10 value="0.2"></td>
 <td>λ</td>
 <td>Spacing between turns</td>
 </tr>
@@ -183,19 +201,27 @@ function calculate(form) {
 <tr>
 <td>n</td>
 <td>user input</td>
-<td><input id="inputTurns" style='font-size:120%' type="number" size=10 value="5"></td>
+<td><input id="inputTurns" style='font-size:105%' type="number" size=10 value="5"></td>
 <td></td>
 <td>Number of turns</td>
 </tr>
 
 <tr>
-<td><input id="buttonSubmit" style='font-size:120%' type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
+<td>C<sub>λ</sub></td>
+<td>user input</td>
+<td><input id="inputCircumference" style='font-size:105%' type="number" value="1" size=10></td>
+<td>λ</td>
+<td>Helix circumference (normally 1)</td>
+</tr>
+
+<tr>
+<td><input id="buttonSubmit" style='font-size:105%' type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
 </tr>
 
 <tr>
 <td>F</td>
 <td>user input</td>
-<td><input id="confirmMHz" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="confirmMHz" style='font-size:105%' type="number" size=10 disabled></td>
 <td>MHz</td>
 <td>Operating frequency</td>
 </tr>
@@ -203,7 +229,7 @@ function calculate(form) {
 <tr>
 <td>S<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="confirmSpacing" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="confirmSpacing" style='font-size:105%' type="number" size=10 disabled></td>
 <td>λ</td>
 <td>Spacing between turns</td>
 </tr>
@@ -211,15 +237,23 @@ function calculate(form) {
 <tr>
 <td>n</td>
 <td>user input</td>
-<td><input id="confirmTurns" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="confirmTurns" style='font-size:105%' type="number" size=10 disabled></td>
 <td></td>
 <td>Number of turns</td>
 </tr>
 
 <tr>
+<td>C<sub>λ</sub></td>
+<td>user input</td>
+<td><input id="confirmCircumference" style='font-size:105%' type="number" value="1.0" size=10></td>
+<td>λ</td>
+<td>Helix circumference (normally 1)</td>
+</tr>
+
+<tr>
 <td>λ</td>
 <td>= c/F/1000</td>
-<td><input id="outputWavelength" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputWavelength" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Operating wavelength</td>
 </tr>
@@ -227,15 +261,15 @@ function calculate(form) {
 <tr>
 <td>C</td>
 <td>= λ*1.0</td>
-<td><input id="outputCircumference" style='font-size:120%' style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputCircumference" style='font-size:105%' style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
-<td>Helix circumference</td>
+<td>Helix circumference (real)</td>
 </tr>
 
 <tr>
 <td>D</td>
 <td>= C/π</td>
-<td><input id="outputDiameter" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputDiameter" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Helix diameter</td>
 </tr>
@@ -243,15 +277,31 @@ function calculate(form) {
 <tr>
 <td>S</td>
 <td>= λ*S<sub>λ</sub></td>
-<td><input id="outputSpacing" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputSpacing" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Spacing between turns</td>
 </tr>
 
 <tr>
+<td>HPBW</sub></td>
+<td>= 52/(C<sub>λ</sub>*√(n*S))</td>
+<td><input id="outputHPBW" style='font-size:105%' type="number" size=10 disabled></td>
+<td>deg</td>
+<td>Half power beamwidth</td>
+</tr>
+
+<tr>
+<td>BWFN</sub></td>
+<td>= 115/(C<sub>λ</sub>*√(n*S))</td>
+<td><input id="outputBWFN" style='font-size:105%' type="number" size=10 value="10000" disabled></td>
+<td>deg</td>
+<td>First null beamwidth</td>
+</tr>
+
+<tr>
 <td>A</td>
 <td>= n*S</td>
-<td><input id="outputAxialLength" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputAxialLength" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Height of helix (axial length)</td>
 </tr>
@@ -259,7 +309,7 @@ function calculate(form) {
 <tr>
 <td>α</td>
 <td>= atan(S/C)</td>
-<td><input id="outputPitch" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputPitch" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
 <td>Pitch angle</td>
 </tr>
@@ -267,7 +317,7 @@ function calculate(form) {
 <tr>
 <td>L<sub>t</sub></td>
 <td>= √(S²+C²)</td>
-<td><input id="outputTurnLength" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputTurnLength" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Length of 1 turn</td>
 </tr>
@@ -275,7 +325,7 @@ function calculate(form) {
 <tr>
 <td>L<sub>h</sub></td>
 <td>= L<sub>t</sub>*n</td>
-<td><input id="outputConductorLength" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputConductorLength" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Total length of helix conductor</td>
 </tr>
@@ -283,7 +333,7 @@ function calculate(form) {
 <tr>
 <td>d<sub></sub></td>
 <td>= λ*0.02</td>
-<td><input id="outputConductorDiameter" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputConductorDiameter" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Ideal diameter of helix conductor</td>
 </tr>
@@ -291,7 +341,7 @@ function calculate(form) {
 <tr>
 <td>R<sub>min</sub></td>
 <td>= λ*0.75</td>
-<td><input id="outputReflectorMin" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputReflectorMin" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Min. diameter of reflector</td>
 </tr>
@@ -299,7 +349,7 @@ function calculate(form) {
 <tr>
 <td>R<sub>max</sub></td>
 <td>= λ*1.1</td>
-<td><input id="outputReflectorMax" style='font-size:120%' type="number" size=10 disabled></td>
+<td><input id="outputReflectorMax" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Max. diameter of reflector</td>
 </tr>
