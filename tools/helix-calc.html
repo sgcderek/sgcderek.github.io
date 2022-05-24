@@ -53,7 +53,7 @@ input[type=number] {
 }
 </style> 
 </head>
-<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%">
+<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%" onLoad="calculate(document.Values);">
 <h1 style="color:#c0ce43;">Helical antenna calculator</h1>
 <p><a href="../index.html">[Back to the main page]</a></p>
 <hr class="solid">
@@ -117,7 +117,7 @@ function calculate(form) {
 		form.outputAxialLength.value = axialLength;
 		
 		// Pitch angle of conductor in degrees
-		var pitchAngle = round( (atan(spacingMM/wavelength))*180/PI *10) / 10;
+		var pitchAngle = round( (atan(spacingMM/circumference))*180/PI *10) / 10;
 		form.outputPitch.value = pitchAngle;
 		
 		// Length of conductor in 1 turn in mm
@@ -222,7 +222,7 @@ function calculate(form) {
 
 <tr>
 <td>C</td>
-<td>= λ*1.0</td>
+<td>= λ*C<sub>λ</sub></td>
 <td><input id="outputCircumference" style='font-size:105%' style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
 <td>Helix circumference (real)</td>
@@ -241,7 +241,7 @@ function calculate(form) {
 <td>= λ*S<sub>λ</sub></td>
 <td><input id="outputSpacing" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
-<td>Spacing between turns</td>
+<td>Spacing between turns (real)</td>
 </tr>
 
 <tr>
@@ -249,7 +249,7 @@ function calculate(form) {
 <td>= 52/(C<sub>λ</sub>*√(n*S))</td>
 <td><input id="outputHPBW" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
-<td>Half power beamwidth</td>
+<td>Half power beam width</td>
 </tr>
 
 <tr>
@@ -257,7 +257,7 @@ function calculate(form) {
 <td>= 115/(C<sub>λ</sub>*√(n*S))</td>
 <td><input id="outputBWFN" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
-<td>First null beamwidth</td>
+<td>First null beam width</td>
 </tr>
 
 <tr>
@@ -337,17 +337,95 @@ function calculate(form) {
 
 <hr class="solid">
 
-<h2 style="color:#c0ce43;">Polarization</h2>
+<h2 style="color:#c0ce43;">Detailed description of properties</h2>
+
+<h3 style="color:#c0ce43;">Operating frequency (F)</h3>
+
+<p>Self-explanatory; F defines the frequency in MHz that the helix should operate at. At lower frequencies (below ~500 MHz), antennas such as the cross-dipole/cross-yagi are usually preferred for circular polarization due to the large scale of the helical antenna at those wavelengths. At high microwave frequencies (above ~3000 MHz), linear waveguide antennas and dish feeds with depolarizers become more convenient for DIY projects. Of course, when proper thought and care is given to the construction, helical antennas can work even outside of this range just fine, and in fact have been used in practice by amateurs and professionals alike (for example large helicals for the 2m ham band, or tiny ones for 5 GHz WiFi or drone/FPV use).</p>
+
+<h3 style="color:#c0ce43;">Turn spacing (S<sub style="color:#c0ce43;">λ</sub>)</h3>
+
+<p>This is the vertical spacing between the turns of the helix expressed in wavelengths and millimeters respecitvely. For example, assuming a wavelength of 100 mm and S<sub>λ</sub> of 0.1, the real turn spacing S would end up being 10 mm. Usually a turn spacing of 0.2 - 0.25 is recommended, though spacings as low as 0.1 are used in practice (for example most of my dish feeds use 0.14, while I have seen commercial Inmarsat antennas use around 0.1). When a lower spacing is used, the number of turns has to be increased accordingly to obtain the same gain and beamwidth.</p>
+
+<h3 style="color:#c0ce43;">Number of turns (n)</h3>
+
+<p>The amount of turns (together with the turn spacing) is what defines the gain and beamwidth of the helical antenna - increasing the turn count also results in higher gain and directivity. In order for a helical antenna to work as intended, it needs to have at least ~3 turns. The highest turn count for a practical helix is ~16.</p>
+
+<h3 style="color:#c0ce43;">Helix circumference (C<sub style="color:#c0ce43;">λ</sub>)</h3>
+
+<p>This is the circumference of an imaginary cylinder that the helix conductor is wound around (between conductor centers), expressed in wavelengths. The ideal value for a helical antenna is 1.0, though very small deviations may be used for experimenting.</p>
+
+<h3 style="color:#c0ce43;">Operating wavelength (λ)</h3>
+
+<p>Same as operating frequency F, except converted to wavelenght. Intermediary value used in other equations mainly for simplicity. For the purposes of this calculator, the wavelength is expressed in millimeters.</p>
+
+<h3 style="color:#c0ce43;">Helix circumference - real (C)</h3>
+
+<p>This is the value of S<sub>λ</sub> expressed in millimeters according to the operational wavelength.</p>
+
+<h3 style="color:#c0ce43;">Helix diameter (D)</h3>
+
+<p>The diameter of the helical antenna, measured between the center points of the conductor.</p>
+
+<h3 style="color:#c0ce43;">Turn spacing - real (S)</h3>
+
+<p>Same as S<sub>λ</sub>, except calculated for the current wavelength. This value together with diameter D are the two important measurements for constructing your helical antenna.</p>
+
+<h3 style="color:#c0ce43;">Half power beam width (B<sub style="color:#c0ce43;">hp</sub>)</h3>
+
+<p>The half power beam width represents the angle within the main lobe of the antenna where its gain is above 50% of the peak gain (angle between -3dB points of the main lobe).</p>
+
+<h3 style="color:#c0ce43;">First null beam width (B<sub style="color:#c0ce43;">fn</sub>)</h3>
+
+<p>Similar to the half power beam width, except the first null angle is estimated between the points of the lowest gain around the main lobe (nulls).</p>
+
+<h3 style="color:#c0ce43;">Gain (G)</h3>
+
+<p>Estimation of the peak gain of the helical antenna in dBi.</p>
+
+<h3 style="color:#c0ce43;">Impedance (Z)</h3>
+
+<p>Estimation of the helical antenna's impedance. Normally this is around 140 Ω, though using a different circumference value will affect it. Information about easy impedance matching techniques can be found further down on this page.</p>
+
+<h3 style="color:#fa4141;">Important note</h3>
+
+<p>The beam width, gain, and impedance estimations are for informative purposes only, and may vary greatly from the real world performance of the antenna. It is even pointed out by John D. Kraus that the formulas tend to overestimate the gain. The estimates will become significantly less accurate as more turns are added to the antenna, or when very low or high turn spacing is used. They may also completely deviate from reality when using a different circumference. When some properties of the helix are exaggerated, the gain estimated gain may be very high and the beam very narrow while in the real world it is the exact opposite. Also, even at microwave frequencies, when the antenna is used near ground level its beam shape will depend a lot on its orientation and elevation. Sometimes the main lobe of a helical antenna may not even be aligned with its long axis.</p>
+
+<p>TL;DR: Keep your expectations realistic, if the theoretical performance shown by this calculator seems too good to be true, then it probably is. After building your helix, do a few tests to observe its performance and adjust it if necessary. For general purpose receive-only (or very low power transmit) applications based on already tested specifications, the estimations will be <i>good enough</i>.</p>
+
+<h3 style="color:#c0ce43;">Height of the helix (A)</h3>
+
+<p>Predicted total height of the helix. This does not include things like the reflector plate or the connector that increase the total height, or impedance matching which can decrease the height.</p>
+
+<h3 style="color:#c0ce43;">Pitch angle (α)</h3>
+
+<p>This shows the angle at which the helical conductor is wound. When using a circumference C<sub>λ</sub> of 1, it essentially expresses the same thing as the turn spacing S<sub>λ</sub>. Similarly to the height A, this does not consider the pitch angle change in any impedance matching sections of the helix.</p>
+
+<h3 style="color:#c0ce43;">Length of 1 turn (L<sub style="color:#c0ce43;">t</sub>)</h3>
+
+<p>Length of conductor used for 1 normal turn of the helix.</p>
+
+<h3 style="color:#c0ce43;">Total length of helix conductor (L<sub style="color:#c0ce43;">h</sub>)</h3>
+
+<p>This is an estimation of how much conductor (wire, tubing, ...) you will need to wind the helix. Once again, this does not consider things like impedance matching or build imperfections, so always leave yourself some extra length if you are cutting it beforehand.</p>
+
+<h3 style="color:#c0ce43;">Ideal diameter of helix conductor (d)</h3>
+
+<p>This tells you which diameter to aim for when selecting your conductor to make the helix. As has been proven by many people though, it is not a critical design restriction, especially when using conductor thinner than recommended.</p>
+
+<h3 style="color:#c0ce43;">Reflector diameter (R<sub style="color:#c0ce43;">min</sub> and R<sub style="color:#c0ce43;">max</sub>)</h3>
+
+<p>These two values define the range for the diameter of a circular reflector plate to be used with the helical antenna. In practice, square reflectors are often used, in which case the two values define the range of the square side lengths. Smaller or larger reflectors can be used but they may have unexpected effects on the gain or radiation pattern. Other reflector types (such as "cups" or "cones") are sometimes also used to increase gain and directivity.</p>
+
+<hr class="solid">
+
+<h2 style="color:#c0ce43;">Polarization selection</h2>
 
 <p>Depending on the way the helical conductor is wound, the resulting antenna will be either right-hand circularly polarized (RHCP) or left-hand circularly polarized (LHCP). A RHCP antenna will not be able to receive LHCP signals, while a LHCP antenna fails to receive RHCP. This is because of a theoretical infinite dB mismatch loss between RHCP and LHCP, although in the real world - where no antenna is perfect - even a RHCP helix will come with a (highly suppressed) LHCP component.</p>
 
 <p>The polarization of a helix can be determined by looking down one of its ends; if the conductor turns in a clockwise manner then the helix is RHCP, if it is counter-clockwise then it's LHCP. As this can at first be confusing to imagine, I have created an image illustrating the visual difference between the two polarizations;</p>
 
 <p><img src="../images/helix-calc/polarizations.jpeg" alt="" width="100%"></p>
-
-<hr class="solid">
-
-<h2 style="color:#c0ce43;">Usage as a dish feed</h2>
 
 <p>Continuing on the topic of polarization, one property of circularly polarized radio waves is that the polarization inverts when reflecting off a surface. This also includes the reflector of a dish antenna.</p>
 
@@ -359,15 +437,9 @@ function calculate(form) {
 
 <hr class="solid">
 
-<h2 style="color:#c0ce43;">Reflector</h2>
+<h2 style="color:#c0ce43;">Impedance matching</h2>
 
-<p>The R<sub>min</sub> and R<sub>max</sub> values refer to the range of optimal diameters for a theoretical circular reflector. In practice a square reflector is often used, in such case the R<sub>min</sub> and R<sub>max</sub> values define the range of the square side lengths.</p>
-
-<hr class="solid">
-
-<h2 style="color:#c0ce43;">Impedance</h2>
-
-<p>A helical antenna in a normal configuration has a high impedance of 150 - 300 ohms, depending on the pitch. Ideally this should be reduced close to 50 ohm to minimize the mismatch loss between the helix and the coaxial connector and cable. One simple way this can be done is by deforming a portion of the first turn so that its pitch gradually changes, from almost parallel to the reflector to the nominal pitch of the rest of the helix.</p>
+<p>A helical antenna in a normal configuration has a high impedance of 140 ohms. Ideally this should be reduced close to 50 ohm to minimize the mismatch loss between the helix and the coaxial connector and cable. One simple way this can be done is by deforming a portion of the first turn so that its pitch gradually changes, from almost parallel to the reflector to the nominal pitch of the rest of the helix.</p>
 
 <p>Another common technique for helix impedance matching is adding a conductive strip to the first quarter turn, this increases the helix conductor's surface area and forms a "capacitor" with the reflector plate.</p>
 
