@@ -60,7 +60,6 @@ input[type=number] {
 
 <p>This is a simple helical antenna calculator that I've been using for my antennas and dish feeds, originally I had it only in a private spreadsheet document. It is based on the book "Antennas For All Applications" by John D. Kraus and Ronald J. Marhefka and the "ARRL Antenna Book".</p>
 <p>Scroll below the calculator to see more information about how to properly build a helix as well as explanations of its individual properties.</p>
-<p>The three user input values are repeated in the output just for the purpose of confirmation that your latest input was submitted correctly.</p>
 
 <hr class="solid">
 
@@ -68,9 +67,6 @@ input[type=number] {
 function calculate(form) {
 	with(Math){
 	
-		form.confirmMHz.disabled = false;
-		form.confirmSpacing.disabled = false;
-		form.confirmTurns.disabled = false;
 		form.outputWavelength.disabled = false;
 		form.outputSpacing.disabled = false;
 		form.outputCircumference.disabled = false;
@@ -85,7 +81,8 @@ function calculate(form) {
 		form.outputReflectorMin.disabled = false;
 		form.outputHPBW.disabled = false;
 		form.outputBWFN.disabled = false;
-		form.confirmCircumference.disabled = false;
+		form.outputGain.disabled = false;
+		form.outputImpedance.disabled = false;
 		
 		// Operating frequency of the helix in MHz
 		var frequency = Number(form.inputMHz.value);
@@ -98,12 +95,6 @@ function calculate(form) {
 		
 		// Circumference in wavelengths
 		var circumferenceWl = Number(form.inputCircumference.value);
-		
-		// Copy inputs to confirmation fields
-		form.confirmMHz.value = frequency;
-		form.confirmSpacing.value = spacing;
-		form.confirmTurns.value = turns;
-		form.confirmCircumference.value = circumferenceWl;
 		
 		// Operating wavelength of the helix in mm
 		var wavelength = round( 299792458/frequency/1000 *10) / 10
@@ -125,7 +116,8 @@ function calculate(form) {
 		var axialLength = round( turns*spacingMM *10) / 10;
 		form.outputAxialLength.value = axialLength;
 		
-		var pitchAngle = round( (atan(spacingMM/wavelength))*180/PI *10) / 10; //TODO
+		// Pitch angle of conductor in degrees
+		var pitchAngle = round( (atan(spacingMM/wavelength))*180/PI *10) / 10;
 		form.outputPitch.value = pitchAngle;
 		
 		// Length of conductor in 1 turn in mm
@@ -156,9 +148,14 @@ function calculate(form) {
 		var BWFN = round( 115/(circumferenceWl*sqrt(turns*spacing)) *10) / 10;
 		form.outputBWFN.value = BWFN;
 		
-		form.confirmMHz.disabled = true;
-		form.confirmSpacing.disabled = true;
-		form.confirmTurns.disabled = true;
+		// Gain in dbi
+		var gain = round( (11.8+10*log(circumferenceWl*circumferenceWl*turns*spacing)) *10) / 10;
+		form.outputGain.value = gain;
+		
+		// Impedance in ohm
+		var impedance = round( (140*circumferenceWl) *10) / 10;
+		form.outputImpedance.value = impedance;
+		
 		form.outputWavelength.disabled = true;
 		form.outputSpacing.disabled = true;
 		form.outputCircumference.disabled = true;
@@ -173,7 +170,8 @@ function calculate(form) {
 		form.outputReflectorMin.disabled = true;
 		form.outputHPBW.disabled = true;
 		form.outputBWFN.disabled = true;
-		form.confirmCircumference.disabled = true;
+		form.outputGain.disabled = true;
+		form.outputImpedance.disabled = true;
 
 	}
 }
@@ -185,7 +183,7 @@ function calculate(form) {
 <tr>
 <td>F</td>
 <td>user input</td>
-<td><input id="inputMHz" style='font-size:105%' type="number" size=10 value="1700"></td>
+<td><input id="inputMHz" style='font-size:105%' type="number" size=10 value="1700" onchange="calculate(document.Values);"></td>
 <td>MHz</td>
 <td>Operating frequency</td>
 </tr>
@@ -193,7 +191,7 @@ function calculate(form) {
 <tr>
 <td>S<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="inputSpacing" style='font-size:105%' type="number" size=10 value="0.2"></td>
+<td><input id="inputSpacing" style='font-size:105%' type="number" size=10 value="0.2" onchange="calculate(document.Values);"></td>
 <td>λ</td>
 <td>Spacing between turns</td>
 </tr>
@@ -201,7 +199,7 @@ function calculate(form) {
 <tr>
 <td>n</td>
 <td>user input</td>
-<td><input id="inputTurns" style='font-size:105%' type="number" size=10 value="5"></td>
+<td><input id="inputTurns" style='font-size:105%' type="number" size=10 value="5" onchange="calculate(document.Values);"></td>
 <td></td>
 <td>Number of turns</td>
 </tr>
@@ -209,43 +207,7 @@ function calculate(form) {
 <tr>
 <td>C<sub>λ</sub></td>
 <td>user input</td>
-<td><input id="inputCircumference" style='font-size:105%' type="number" value="1" size=10></td>
-<td>λ</td>
-<td>Helix circumference (normally 1)</td>
-</tr>
-
-<tr>
-<td><input id="buttonSubmit" style='font-size:105%' type="button" size=10 value="Submit" onClick="calculate(document.Values);"></td>
-</tr>
-
-<tr>
-<td>F</td>
-<td>user input</td>
-<td><input id="confirmMHz" style='font-size:105%' type="number" size=10 disabled></td>
-<td>MHz</td>
-<td>Operating frequency</td>
-</tr>
-
-<tr>
-<td>S<sub>λ</sub></td>
-<td>user input</td>
-<td><input id="confirmSpacing" style='font-size:105%' type="number" size=10 disabled></td>
-<td>λ</td>
-<td>Spacing between turns</td>
-</tr>
-
-<tr>
-<td>n</td>
-<td>user input</td>
-<td><input id="confirmTurns" style='font-size:105%' type="number" size=10 disabled></td>
-<td></td>
-<td>Number of turns</td>
-</tr>
-
-<tr>
-<td>C<sub>λ</sub></td>
-<td>user input</td>
-<td><input id="confirmCircumference" style='font-size:105%' type="number" value="1.0" size=10></td>
+<td><input id="inputCircumference" style='font-size:105%' type="number" value="1" size=10 onchange="calculate(document.Values);"></td>
 <td>λ</td>
 <td>Helix circumference (normally 1)</td>
 </tr>
@@ -283,7 +245,7 @@ function calculate(form) {
 </tr>
 
 <tr>
-<td>HPBW</sub></td>
+<td>B<sub>hp</sub></td>
 <td>= 52/(C<sub>λ</sub>*√(n*S))</td>
 <td><input id="outputHPBW" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
@@ -291,11 +253,27 @@ function calculate(form) {
 </tr>
 
 <tr>
-<td>BWFN</sub></td>
+<td>B<sub>fn</sub></td>
 <td>= 115/(C<sub>λ</sub>*√(n*S))</td>
 <td><input id="outputBWFN" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
 <td>First null beamwidth</td>
+</tr>
+
+<tr>
+<td>G</td>
+<td>= 11.8+10log(C<sub>λ</sub>²*n*S)</td>
+<td><input id="outputGain" style='font-size:105%' type="number" size=10 disabled></td>
+<td>dBi</td>
+<td>Estimated gain</td>
+</tr>
+
+<tr>
+<td>Z</td>
+<td>= 140*C<sub>λ</sub></td>
+<td><input id="outputImpedance" style='font-size:105%' type="number" size=10 disabled></td>
+<td>Ω</td>
+<td>Estimated impedance</td>
 </tr>
 
 <tr>
