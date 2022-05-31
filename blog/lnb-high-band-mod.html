@@ -1,55 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <title>Hard-wiring an LNB to use the high band 10.6 GHz oscillator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<style>
-@font-face {
-  font-family: 'Play';
-  src: url('../fonts/Play/Play-Regular.ttf')  format('truetype');
-}
-* {
-  color: white;
-  background-color: transparent;
-  text-decoration: none;
-  text-align: left;
-  font-family: Play;
-}
-a:link {
-  color: #7199ea;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #7199ea;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #dddbf8;
-  background-color: transparent;
-  text-decoration: none;
-}
-
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
-}
-</style> 
+<link rel="stylesheet" href="../styles/default.css">
 </head>
-<body style="background-color:#080818;padding-left:15%;padding-right:15%;padding-top:5%">
-<h1 style="color:#c0ce43;">Hard-wiring an LNB to use the high band 10.6 GHz oscillator</h1>
+
+<body>
+<h1>Hard-wiring an LNB to use the high band 10.6 GHz oscillator</h1>
 <p><i>2 December 2021</i></p>
 <p><a href="../index.html">[Back to the main page]</a></p>
 <p>Previous article: <a href="starlink-beacons.html">Receiving Starlink satellite beacons on a budget</a></p>
 
 <hr class="solid">
 
-<h2 style="color:#c0ce43;">Introduction</h2>
+<h2>Introduction</h2>
 
 <p>In this post I will show how I modified an old DRO universal Ku-Band LNB to use the &ldquo;high band&rdquo; 10.6 GHz local oscillator without the need of any additional control circuitry besides a power injector (bias-tee). This is a loose continuation of my <a href="starlink-beacons.html">previous blog post</a> in which I&rsquo;ve outlined how an LNB just like this can be used to receive radio beacons from the Starlink satellites.</p>
 <p>I have shown that after connecting an LNB to an SDR and powering it up, very strong beacon emissions can be received from the satellites at 11325 MHz, which translates to 1575 MHz IF. This is the &ldquo;intermediate frequency&rdquo; - a product that is created by mixing the signal received by the LNB with a signal from its built-in local oscillator.</p>
@@ -65,7 +32,7 @@ a:active {
 <p>This results in simple 1/0 communication that the LNB uses to pick the oscillator. When the signal is detected, the high band is used. When the signal isn&rsquo;t detected, the LNB defaults to the low band, with the latter case being what I&rsquo;ve used for the 11325 MHz Starlink beacons.</p>
 
 <hr class="solid">
-<h2 style="color:#c0ce43;">A non-invasive alternative</h2>
+<h2>A non-invasive alternative</h2>
 
 <p>Let&rsquo;s counterintuitively talk about a method other than the one the rest of the post will be focusing at, just to give you the idea of how it could be done without opening up the LNB and hard-wiring it.</p>
 <p>Probably the most neat and SDR-friendly way to switch to the high band of an LNB is to use an in-line 22 kHz signal generator. I bought one that I integrated into <a href="https://twitter.com/dereksgc/status/1414712716502126593" target="_blank" rel="noopener">my LNB controller</a> - it runs on the same voltage as the LNB and both uses and passes bias-tee current, making it a drop-in solution which then simplifies the high band selection into just a switch flip. Of course this isn&rsquo;t a viable option for everyone and all use cases. It costs money and may not even be available for purchase in some countries. And even though I own it, I still wouldn&rsquo;t want to sacrifice it into a permanent setup, such as a dedicated LNB for Starlink beacon &ldquo;monitoring&rdquo;. There, hard-wiring the LNB is still better as it will not require this generator (and by extension consume less electric current and reduce failure points).</p>
@@ -76,7 +43,7 @@ a:active {
 <p>But now, let’s finally get to the main topic!</p>
 
 <hr class="solid">
-<h2 style="color:#c0ce43;">Example 1: DRO</h2>
+<h2>Example 1: DRO</h2>
 
 <p>The most important characteristic of an LNB that will dictate how this modification is done is what method the LNB uses to synthesize the LO frequency. You may already be familiar with these terms if you’ve ever shopped for an LNB for satellite television. Most modern LNBs use a phase-locked loop (PLL), while the older ones use dielectric resonator oscillators (DRO). In the first example I am using an old Grundig DRO LNB, which generally will have a much simpler construction (there will be many more parts than in a PLL LNB, however it will be much clearer to see how the LNB functions and selects the LO frequency).</p>
 
@@ -125,7 +92,7 @@ a:active {
 <p>Armed with the 10600 MHz LO, when the LNB is used with something like an RTL-SDR V3, its receive range will effectively be shifted from 20 - 1750 MHz MHz to 10620 - 12350 MHz, which is enough to receive three out of the four Starlink beacon frequencies, including the most active one at 11950 MHz. Following is one additional example, this time using a defunct circuit board of a modern, brand new, dirt cheap PLL LNB.</p>
 
 <hr class="solid">
-<h2 style="color:#c0ce43;">Example 2: PLL</h2>
+<h2>Example 2: PLL</h2>
 
 <p>Modern PLL LNBs can be this cheap because everything about them has been optimized and made as simple to manufacture as possible. This means that the majority of the components you&rsquo;ve seen in the previous DRO example are now contained within a single integrated circuit. Sadly I won&rsquo;t be able to actually do the mod with this LNB and test it, as it&rsquo;s already been abused a lot and isn&rsquo;t working anymore, but the (mostly) intact PCB is enough to demonstrate how you would go about modifying it (your LNB will most likely be different, so having a second complete real-world example wouldn&rsquo;t help much anyway).</p>
 <p>Getting to the circuit board is the exact same process as before, except this particular LNB had to have its plastic shell taken off destructively as it wasn&rsquo;t made to be disassembled (for obvious reasons). If you have an LNB like that, try to preserve as much of the shell as possible so you can at least tape or glue it back if you want.</p>
@@ -146,7 +113,7 @@ a:active {
 <p>It does however serve as a good example of the differences between modifying a DRO and PLL LNB to use the high band without a 22 kHz control signal.</p>
 
 <hr class="solid">
-<h2 style="color:#c0ce43;">Conclusion</h2>
+<h2>Conclusion</h2>
 
 <p>While hard-wiring an LNB like this isn&rsquo;t the easiest task, assuming that you can get an LNB that you don&rsquo;t mind losing, you do end up with a device that easily extends the range of your SDR receiver beyond what&rsquo;s possible with just a normal LNB and no control signal. Of course the LNB can be mounted into the focal point of a dish reflector and used to receive signals from other satellites, such as the many strong telemetry beacons from geostationary satellites, that - unlike Starlink&rsquo;s - do actually contain some data. This is something that I&rsquo;ve been trying to write about for a while now but never found the motivation to finish, so do expect that in the (not so) near future.</p>
 <p>Even if admittedly there aren&rsquo;t that many interesting signals to receive with either a modded or a stock Ku-Band LNB, I think that doing a simple modification like this can also serve as basic introduction to how LNBs work and are designed, with the general understanding of the PCB layout then enabling you to come up with your own modifications that could be done.</p>
