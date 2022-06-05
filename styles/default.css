@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Play';
-  src: url('../fonts/Play/Play-Regular.ttf')  format('truetype');
+  src: url('/fonts/Play/Play-Regular.ttf')  format('truetype');
 }
 * {
   color: white;
@@ -29,20 +29,37 @@ a:link {
   background-color: transparent;
   text-decoration: none;
 }
-
 a:visited {
   color: #7199ea;
   background-color: transparent;
   text-decoration: none;
 }
-
 a:hover {
+  color: #f8dbdb;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.red:link {
+  color: #cc4e4e;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.red:visited {
+  color: #cc4e4e;
+  background-color: transparent;
+  text-decoration: none;
+}
+a.red:hover {
   color: #dddbf8;
   background-color: transparent;
   text-decoration: none;
 }
-
-a:active {
+a.red:active {
   color: yellow;
   background-color: transparent;
   text-decoration: none;
