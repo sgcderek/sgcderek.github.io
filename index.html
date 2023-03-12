@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-<title>Derek OK9SGC</title>
+<title>sgcderek</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/styles/default.css">
 </head>
 
-<body style="text-align: center;">
+<body style="text-align: center;" onkeyup="changeBackgroundImage(event)">
 
-<h1>Derek OK9SGC</h1>
+<h1>sgcderek</h1>
 
 <p>Welcome to my site. Here you will find a random assortment of information and topics related to amateur radio, with a heavy focus on amateur satellite reception. To see more of my content or to contact me, check out my social media links below;</p>
 <p><a href="https://mas.to/@dereksgc" target="_blank">Mastodon</a> - <a href="https://www.youtube.com/channel/UCSHVnVnUErLxEU1mfWM3EBw" target="_blank">YouTube</a> - <a href="https://github.com/sgcderek" target="_blank">GitHub</a> - <a href="https://www.thingiverse.com/derekcz/designs" target="_blank">Thingiverse</a> - <a href="https://twitter.com/dereksgc" target="_blank">Twitter</a> - <a href="/blog/nokia-3310.html#number">SMS?</a></p>
@@ -44,6 +44,18 @@
 <a href="/blog/lnb-high-band-mod.html">Hard-wiring an LNB to use the high band 10.6 GHz oscillator</a><br />
 <a href="/blog/starlink-beacons.html">Receiving Starlink satellite beacons on a budget</a><br />
 <a href="/blog/noaa2-revival.html">NOAA-2 returning from the dead</a></p>
+
+<script>
+    let buffer = "";
+    function changeBackgroundImage(event) {
+        buffer = (buffer + event.key).slice(-8);
+        if (buffer.toLowerCase() === "aiwprton") {
+            document.body.style.backgroundImage = "url('images/rhino.webp')";
+            document.body.style.backgroundSize = "cover";
+            buffer = "";
+        }
+    }
+</script>
 
 </body>
 </html>
