@@ -2,12 +2,14 @@
   font-family: 'Play';
   src: url('/fonts/Play/Play-Regular.ttf')  format('truetype');
 }
+
 * {
   color: white;
   background-color: transparent;
   text-decoration: none;
   font-family: Play;
 }
+
 body {
   background-color: #080818;
   padding-left:15%;
@@ -15,6 +17,7 @@ body {
   padding-top:5%;
   text-align: left;
 }
+
 h1 {
   color: #c0ce43;
 }
@@ -24,6 +27,7 @@ h2 {
 h3 {
   color: #c0ce43;
 }
+
 a:link {
   color: #7199ea;
   background-color: transparent;
@@ -44,6 +48,7 @@ a:active {
   background-color: transparent;
   text-decoration: none;
 }
+
 a.red:link {
   color: #cc4e4e;
   background-color: transparent;
