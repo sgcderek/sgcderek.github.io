@@ -77,7 +77,6 @@ function calculate(form) {
 		form.outputTurnLength.disabled = false;
 		form.outputConductorLength.disabled = false;
 		form.outputConductorDiameter.disabled = false;
-		form.outputReflectorMax.disabled = false;
 		form.outputReflectorMin.disabled = false;
 		form.outputHPBW.disabled = false;
 		form.outputBWFN.disabled = false;
@@ -132,13 +131,9 @@ function calculate(form) {
 		var conductorDiameter = round( wavelength*0.02 *100) / 100;
 		form.outputConductorDiameter.value = conductorDiameter;
 
-		// Min diameter of reflector in mm
+		// Min diameter of ground plane in mm
 		var reflectorMin = round( wavelength*0.75 *10) / 10;
 		form.outputReflectorMin.value = reflectorMin;
-		
-		// Max diameter of reflector in mm
-		var reflectorMax = round( wavelength*1.1 *10) / 10;
-		form.outputReflectorMax.value = reflectorMax;
 		
 		// Half power beamwidth in degrees
 		var HPBW = round( 52/(circumferenceWl*sqrt(turns*spacing)) *10) / 10;
@@ -149,7 +144,7 @@ function calculate(form) {
 		form.outputBWFN.value = BWFN;
 		
 		// Gain in dbi
-		var gain = round( (11.8+10*log(circumferenceWl*circumferenceWl*turns*spacing)) *10) / 10;
+		var gain = round( (10.79+10*log10(circumferenceWl*circumferenceWl*turns*spacing)) *10) / 10;
 		form.outputGain.value = gain;
 		
 		// Impedance in ohm
@@ -166,7 +161,6 @@ function calculate(form) {
 		form.outputTurnLength.disabled = true;
 		form.outputConductorLength.disabled = true;
 		form.outputConductorDiameter.disabled = true;
-		form.outputReflectorMax.disabled = true;
 		form.outputReflectorMin.disabled = true;
 		form.outputHPBW.disabled = true;
 		form.outputBWFN.disabled = true;
@@ -246,26 +240,26 @@ function calculate(form) {
 
 <tr>
 <td>B<sub>hp</sub></td>
-<td>= 52/(C<sub>λ</sub>*√(n*S))</td>
+<td>= 52/(C<sub>λ</sub>*√(n*S<sub>λ</sub>))</td>
 <td><input id="outputHPBW" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
-<td>Half power beam width</td>
+<td><i style="color:#fae0aa;">Half power beam width*</i></td>
 </tr>
 
 <tr>
 <td>B<sub>fn</sub></td>
-<td>= 115/(C<sub>λ</sub>*√(n*S))</td>
+<td>= 115/(C<sub>λ</sub>*√(n*S<sub>λ</sub>))</td>
 <td><input id="outputBWFN" style='font-size:105%' type="number" size=10 disabled></td>
 <td>deg</td>
-<td>First null beam width</td>
+<td><i style="color:#fae0aa;">First null beam width*</i></td>
 </tr>
 
 <tr>
 <td>G</td>
-<td>= 11.8+10log(C<sub>λ</sub>²*n*S)</td>
+<td>= 10.79+10*log(C<sub>λ</sub>²*n*S<sub>λ</sub>)</td>
 <td><input id="outputGain" style='font-size:105%' type="number" size=10 disabled></td>
 <td>dBi</td>
-<td>Estimated gain</td>
+<td><i style="color:#fae0aa;">Estimated gain*</i></td>
 </tr>
 
 <tr>
@@ -273,7 +267,7 @@ function calculate(form) {
 <td>= 140*C<sub>λ</sub></td>
 <td><input id="outputImpedance" style='font-size:105%' type="number" size=10 disabled></td>
 <td>Ω</td>
-<td>Estimated impedance</td>
+<td><i style="color:#fae0aa;">Estimated impedance*</i></td>
 </tr>
 
 <tr>
@@ -321,21 +315,21 @@ function calculate(form) {
 <td>= λ*0.75</td>
 <td><input id="outputReflectorMin" style='font-size:105%' type="number" size=10 disabled></td>
 <td>mm</td>
-<td>Min. diameter of reflector</td>
-</tr>
-
-<tr>
-<td>R<sub>max</sub></td>
-<td>= λ*1.1</td>
-<td><input id="outputReflectorMax" style='font-size:105%' type="number" size=10 disabled></td>
-<td>mm</td>
-<td>Max. diameter of reflector</td>
+<td>Min. diameter of ground plane</td>
 </tr>
 
 </table>
 </form>
 
 <hr class="solid">
+
+<h3 style="color:#fae0aa;">* Important note;</h3>
+
+<p>The beam width, gain, and impedance estimations are for informative purposes only, and may vary greatly from the real world performance of the antenna. It is even pointed out by John D. Kraus that the formulas tend to overestimate the gain. The estimates will become significantly less accurate as more turns are added to the antenna, or when very low or high turn spacing is used. They may also completely deviate from reality when using a different circumference. When some properties of the helix are exaggerated, the estimated gain may be very high and the beam very narrow while in the real world it is the exact opposite. Also, even at microwave frequencies, when the antenna is used near ground level its beam shape will depend a lot on its orientation and elevation. In practice this means that an antenna's beam may appear to be "deflected" away from its target.</p>
+
+<p>The ground plane size is also not taken into account by this calculator, which is something that can greatly influence all of the mentioned values in the real world.</p>
+
+<p>TL;DR: Keep your expectations realistic, if the theoretical performance shown by this calculator seems too good to be true, then it probably is. After building your helix, do a few tests to observe its performance and adjust it if necessary. For general purpose receive-only (or very low power transmit) applications based on already tested specifications, the estimations will be <i>good enough</i>.</p>
 
 <h2 style="color:#c0ce43;">Detailed description of properties</h2>
 
@@ -387,15 +381,9 @@ function calculate(form) {
 
 <p>Estimation of the helical antenna's impedance. Normally this is around 140 Ω, though using a different circumference value will affect it. Information about easy impedance matching techniques can be found further down on this page.</p>
 
-<h3 style="color:#fa4141;">Important note</h3>
-
-<p>The beam width, gain, and impedance estimations are for informative purposes only, and may vary greatly from the real world performance of the antenna. It is even pointed out by John D. Kraus that the formulas tend to overestimate the gain. The estimates will become significantly less accurate as more turns are added to the antenna, or when very low or high turn spacing is used. They may also completely deviate from reality when using a different circumference. When some properties of the helix are exaggerated, the gain estimated gain may be very high and the beam very narrow while in the real world it is the exact opposite. Also, even at microwave frequencies, when the antenna is used near ground level its beam shape will depend a lot on its orientation and elevation. Sometimes the main lobe of a helical antenna may not even be aligned with its long axis.</p>
-
-<p>TL;DR: Keep your expectations realistic, if the theoretical performance shown by this calculator seems too good to be true, then it probably is. After building your helix, do a few tests to observe its performance and adjust it if necessary. For general purpose receive-only (or very low power transmit) applications based on already tested specifications, the estimations will be <i>good enough</i>.</p>
-
 <h3 style="color:#c0ce43;">Height of the helix (A)</h3>
 
-<p>Predicted total height of the helix. This does not include things like the reflector plate or the connector that increase the total height, or impedance matching which can decrease the height.</p>
+<p>Predicted total height of the helix. This does not include things like the ground plane or the connector that increase the total height, or impedance matching which can decrease the height.</p>
 
 <h3 style="color:#c0ce43;">Pitch angle (α)</h3>
 
@@ -413,9 +401,9 @@ function calculate(form) {
 
 <p>This tells you which diameter to aim for when selecting your conductor to make the helix. As has been proven by many people though, it is not a critical design restriction, especially when using conductor thinner than recommended.</p>
 
-<h3 style="color:#c0ce43;">Reflector diameter (R<sub style="color:#c0ce43;">min</sub> and R<sub style="color:#c0ce43;">max</sub>)</h3>
+<h3 style="color:#c0ce43;">Ground plane diameter (R<sub style="color:#c0ce43;">min</sub>)</h3>
 
-<p>These two values define the range for the diameter of a circular reflector plate to be used with the helical antenna. In practice, square reflectors are often used, in which case the two values define the range of the square side lengths. Smaller or larger reflectors can be used but they may have unexpected effects on the gain or radiation pattern. Other reflector types (such as "cups" or "cones") are sometimes also used to increase gain and directivity.</p>
+<p>Estimated minimum diameter of a flat circular ground plane to achieve axial mode operation. In practice, square ground planes are often used, in which case the value can be treated as the minimum length of the square's side. Other ground plane types (such as "cups" or "cones") can be used to optimize the antenna's gain, beamwidth, and useful bandwidth.</p>
 
 <hr class="solid">
 
@@ -439,9 +427,9 @@ function calculate(form) {
 
 <h2 style="color:#c0ce43;">Impedance matching</h2>
 
-<p>A helical antenna in a normal configuration has a high impedance of 140 ohms. Ideally this should be reduced close to 50 ohm to minimize the mismatch loss between the helix and the coaxial connector and cable. One simple way this can be done is by deforming a portion of the first turn so that its pitch gradually changes, from almost parallel to the reflector to the nominal pitch of the rest of the helix.</p>
+<p>A helical antenna in a normal configuration has a high impedance of 140 ohms. Ideally this should be reduced close to 50 ohm to minimize the mismatch loss between the helix and the coaxial connector and cable. One simple way this can be done is by deforming a portion of the first turn so that its pitch gradually changes, from almost parallel to the ground plane to the nominal pitch of the rest of the helix.</p>
 
-<p>Another common technique for helix impedance matching is adding a conductive strip to the first quarter turn, this increases the helix conductor's surface area and forms a "capacitor" with the reflector plate.</p>
+<p>Another common technique for helix impedance matching is adding a conductive strip to the first quarter turn, this increases the helix conductor's surface area and forms a "capacitor" with the ground plane.</p>
 
 <p>An example of a helical antenna utilizing both methods can be seen below.</p>
 
