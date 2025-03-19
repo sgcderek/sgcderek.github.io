@@ -1,0 +1,160 @@
+<!-- chatgpt code that kind of works -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Random Gradient with Hue Randomization</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            max-width: 100%;
+            max-height: 100%;
+            width: 90%; /* Adjust this to control the margins */
+            height: 90%; /* Adjust this to control the margins */
+            position: relative;
+        }
+
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+			font-family: monospace;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <canvas id="canvas"></canvas>
+        <div class="buttons">
+            <button onclick="reloadPage()">↻</button>
+            <button onclick="downloadGradient()"> ↓ </button>
+        </div>
+    </div>
+
+    <script>
+        // Function to generate a random HSL color with luminance fixed at 80
+        function randomColorWithLuminance(luminance = 80) {
+            const hue = Math.floor(Math.random() * 360); // Random hue between 0 and 360
+            const saturation = 100; // Full saturation for vibrant colors
+            return `hsl(${hue}, ${saturation}%, ${luminance}%)`;
+        }
+
+        // Function to generate the gradient with random hues and luminance fixed at 80
+        function generateGradient(isDownload = false) {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // Get the screen resolution (using device's physical screen resolution)
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+
+            // Get the device pixel ratio for higher resolution on retina displays
+            const pixelRatio = window.devicePixelRatio || 1;
+
+            // For preview, use the viewport size
+            if (!isDownload) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            // For download, use the physical screen resolution (screen width * device pixel ratio)
+            if (isDownload) {
+                const deviceWidth = screenWidth * pixelRatio;
+                const deviceHeight = screenHeight * pixelRatio;
+
+                canvas.width = deviceWidth;
+                canvas.height = deviceHeight;
+            }
+
+            // Scale the canvas context for higher resolution
+            ctx.scale(pixelRatio, pixelRatio);
+
+            // Generate random colors with luminance fixed at 80
+            const color1 = randomColorWithLuminance();
+            const color2 = randomColorWithLuminance();
+
+            // Randomly pick two corners for the gradient
+            const corners = [
+                { x: 0, y: 0 },  // top-left
+                { x: screenWidth, y: 0 },  // top-right
+                { x: 0, y: screenHeight },  // bottom-left
+                { x: screenWidth, y: screenHeight }  // bottom-right
+            ];
+
+            // Randomly select two different corners for the gradient
+            const randomCornerIndex1 = Math.floor(Math.random() * 4);
+            let randomCornerIndex2 = Math.floor(Math.random() * 4);
+            while (randomCornerIndex2 === randomCornerIndex1) {
+                randomCornerIndex2 = Math.floor(Math.random() * 4);
+            }
+
+            const startCorner = corners[randomCornerIndex1];
+            const endCorner = corners[randomCornerIndex2];
+
+            // Create the gradient
+            const gradient = ctx.createLinearGradient(startCorner.x, startCorner.y, endCorner.x, endCorner.y);
+            gradient.addColorStop(0, color1);
+            gradient.addColorStop(1, color2);
+
+            // Apply the gradient to fill the canvas
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Function to reload the page (reset the gradient)
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Function to trigger the download of the gradient image
+        function downloadGradient() {
+            // Generate the gradient at the device's physical resolution
+            generateGradient(true);
+
+            // Convert the canvas content to a data URL (image)
+            const imageUrl = document.getElementById("canvas").toDataURL("image/png");
+
+            // Open the image in a new tab for downloading
+            const newTab = window.open();
+            newTab.document.body.innerHTML = `<img src="${imageUrl}" style="width: 100%; height: auto;" />`;
+        }
+
+        // Generate the gradient when the page loads
+        window.onload = generateGradient;
+
+        // Regenerate the gradient on window resize
+        window.onresize = generateGradient;
+    </script>
+</body>
+</html>
