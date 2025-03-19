@@ -53,7 +53,9 @@ Orientation:
 ${orientation}
 `;
         }
-        
+
+        window.onresize = updateScreenInfo;
+        setInterval(updateScreenInfo, 5000);
         window.onload = updateScreenInfo;
     </script>
 </body>
