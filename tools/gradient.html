@@ -1,160 +1,313 @@
-<!-- chatgpt code that kind of works -->
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Random Gradient with Hue Randomization</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            overflow: hidden;
-            background-color: #000;
-        }
+  <meta charset="UTF-8"> <!-- Specify UTF-8 encoding -->
+  <title>Gradient Generator</title>
+<style>
+body {
+  font-family: Arial, sans-serif; /* Universal font for better arrow rendering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #000000; /* Black background */
+  color: #FFFFFF; /* White text */
+}
 
-        #container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            max-width: 100%;
-            max-height: 100%;
-            width: 90%; /* Adjust this to control the margins */
-            height: 90%; /* Adjust this to control the margins */
-            position: relative;
-        }
+.container {
+  text-align: center;
+  padding: 20px;
+  background-color: #1e1e1e; /* Dark grey background for the container */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  max-width: 400px; /* Restrict the max width of the container */
+  width: 100%;
+}
 
-        canvas {
-            max-width: 100%;
-            max-height: 100%;
-        }
+.form-group {
+  margin: 10px 0;
+}
 
-        button {
-            margin-top: 20px;
-            padding: 10px;
-            font-size: 16px;
-			font-family: monospace;
-            cursor: pointer;
-            z-index: 1;
-        }
+input, select, button {
+  font-size: 1rem;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #333333;
+  color: #ffffff;
+  width: calc(100% - 16px); /* Ensure input fields and buttons stay within the container */
+}
 
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
+input[type="color"] {
+  width: 40px;  /* Make the color picker square a bit bigger */
+  height: 40px; /* Keep it square */
+  border: none;
+  background-color: transparent;
+  cursor: pointer; /* Make it clear it's interactive */
+}
+
+.color-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-input-container input[type="text"] {
+  width: 80px;  /* Adjust width of the text input for hex (wider to fit hex value) */
+  text-align: center; /* Center the text */
+}
+
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.radio-group input {
+  margin: 0;
+}
+
+.slider-label {
+  font-size: 1.2rem;
+}
+
+.slider-label, #dither-value {
+  display: inline-block;
+  width: 70px; /* Fixed width for the label */
+  text-align: center;
+}
+
+#reset {
+  background-color: #e74c3c; /* Red background for reset button */
+}
+
+#reset:hover {
+  background-color: #c0392b; /* Darker red when hovered */
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+</style>
+
 </head>
 <body>
+  <div class="container">
+    <h1>Gradient Generator</h1>
 
-    <div id="container">
-        <canvas id="canvas"></canvas>
-        <div class="buttons">
-            <button onclick="reloadPage()">↻</button>
-            <button onclick="downloadGradient()"> ↓ </button>
-        </div>
+    <div class="form-group color-input-container">
+      <!-- Color Picker and Hex Input for Color 1 -->
+      <input type="color" id="color1" value="#99ffd9">
+      <input type="text" id="hex1" value="#99ffd9" maxlength="7" />
+      
+      <!-- Color Picker and Hex Input for Color 2 -->
+      <input type="color" id="color2" value="#e699ff">
+      <input type="text" id="hex2" value="#e699ff" maxlength="7" />
     </div>
 
-    <script>
-        // Function to generate a random HSL color with luminance fixed at 80
-        function randomColorWithLuminance(luminance = 80) {
-            const hue = Math.floor(Math.random() * 360); // Random hue between 0 and 360
-            const saturation = 100; // Full saturation for vibrant colors
-            return `hsl(${hue}, ${saturation}%, ${luminance}%)`;
-        }
+    <div class="form-group">
+      <div class="radio-group">
+        <label><input type="radio" name="direction" value="↗">↗</label>
+        <label><input type="radio" name="direction" value="→">→</label>
+        <label><input type="radio" name="direction" value="↘">↘</label>
+        <label><input type="radio" name="direction" value="↓">↓</label>
+        <label><input type="radio" name="direction" value="↙">↙</label>
+        <label><input type="radio" name="direction" value="←">←</label>
+        <label><input type="radio" name="direction" value="↖">↖</label>
+        <label><input type="radio" name="direction" value="↑" checked> ↑</label>
+      </div>
+    </div>
 
-        // Function to generate the gradient with random hues and luminance fixed at 80
-        function generateGradient(isDownload = false) {
-            const canvas = document.getElementById("canvas");
-            const ctx = canvas.getContext("2d");
+    <div class="form-group">
+      <label class="slider-label" for="dither">Noise: <span id="dither-value">10</span></label>
+      <input type="range" id="dither" min="0" max="100" value="10">
+    </div>
 
-            // Get the screen resolution (using device's physical screen resolution)
-            const screenWidth = window.screen.width;
-            const screenHeight = window.screen.height;
+    <div class="form-group">
+      <label for="width">Dimensions:</label>
+    </div>
 
-            // Get the device pixel ratio for higher resolution on retina displays
-            const pixelRatio = window.devicePixelRatio || 1;
+    <div class="form-group">
+      <input type="number" id="width">
+    </div>
 
-            // For preview, use the viewport size
-            if (!isDownload) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
+    <div class="form-group">
+      <input type="number" id="height">
+    </div>
 
-            // For download, use the physical screen resolution (screen width * device pixel ratio)
-            if (isDownload) {
-                const deviceWidth = screenWidth * pixelRatio;
-                const deviceHeight = screenHeight * pixelRatio;
+    <div class="form-group">
+      <button id="reset">Reset</button>
+      <button id="generate">Generate</button>
+    </div>
+  </div>
 
-                canvas.width = deviceWidth;
-                canvas.height = deviceHeight;
-            }
+  <script>
+    // Detect device resolution and adjust for pixel ratio
+    function getDeviceResolution() {
+      const width = screen.width * window.devicePixelRatio;
+      const height = screen.height * window.devicePixelRatio;
+      document.getElementById('width').value = Math.round(width);
+      document.getElementById('height').value = Math.round(height);
+    }
 
-            // Scale the canvas context for higher resolution
-            ctx.scale(pixelRatio, pixelRatio);
+    getDeviceResolution();
 
-            // Generate random colors with luminance fixed at 80
-            const color1 = randomColorWithLuminance();
-            const color2 = randomColorWithLuminance();
+    // Update Dither value display when the page loads
+    const ditherSlider = document.getElementById('dither');
+    const ditherValue = document.getElementById('dither-value');
 
-            // Randomly pick two corners for the gradient
-            const corners = [
-                { x: 0, y: 0 },  // top-left
-                { x: screenWidth, y: 0 },  // top-right
-                { x: 0, y: screenHeight },  // bottom-left
-                { x: screenWidth, y: screenHeight }  // bottom-right
-            ];
+    // Initialize the display to match the slider's initial value
+    ditherValue.textContent = ditherSlider.value;
 
-            // Randomly select two different corners for the gradient
-            const randomCornerIndex1 = Math.floor(Math.random() * 4);
-            let randomCornerIndex2 = Math.floor(Math.random() * 4);
-            while (randomCornerIndex2 === randomCornerIndex1) {
-                randomCornerIndex2 = Math.floor(Math.random() * 4);
-            }
+    // Update the display when the slider value changes
+    ditherSlider.addEventListener('input', () => {
+      ditherValue.textContent = ditherSlider.value;
+    });
 
-            const startCorner = corners[randomCornerIndex1];
-            const endCorner = corners[randomCornerIndex2];
+    // Sync color picker with hex input and vice versa
+    function syncColorInputs() {
+      const color1 = document.getElementById('color1');
+      const hex1 = document.getElementById('hex1');
+      const color2 = document.getElementById('color2');
+      const hex2 = document.getElementById('hex2');
+      
+      // When color picker changes, update hex input
+      color1.addEventListener('input', () => {
+        hex1.value = color1.value;
+      });
+      color2.addEventListener('input', () => {
+        hex2.value = color2.value;
+      });
 
-            // Create the gradient
-            const gradient = ctx.createLinearGradient(startCorner.x, startCorner.y, endCorner.x, endCorner.y);
-            gradient.addColorStop(0, color1);
-            gradient.addColorStop(1, color2);
+      // When hex input changes, update color picker
+      hex1.addEventListener('input', () => {
+        color1.value = hex1.value;
+      });
+      hex2.addEventListener('input', () => {
+        color2.value = hex2.value;
+      });
+    }
 
-            // Apply the gradient to fill the canvas
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
+    syncColorInputs(); // Initialize syncing
 
-        // Function to reload the page (reset the gradient)
-        function reloadPage() {
-            location.reload();
-        }
+    // Reset function to restore default values
+    function resetForm() {
+      // Reset color pickers to default values
+      document.getElementById('color1').value = '#99ffd9';
+      document.getElementById('color2').value = '#e699ff';
 
-        // Function to trigger the download of the gradient image
-        function downloadGradient() {
-            // Generate the gradient at the device's physical resolution
-            generateGradient(true);
+      // Reset hex inputs to default values
+      document.getElementById('hex1').value = '#99ffd9';
+      document.getElementById('hex2').value = '#e699ff';
 
-            // Convert the canvas content to a data URL (image)
-            const imageUrl = document.getElementById("canvas").toDataURL("image/png");
+      // Reset direction radio buttons to default (↑)
+      document.querySelector('input[name="direction"][value="↑"]').checked = true;
 
-            // Open the image in a new tab for downloading
-            const newTab = window.open();
-            newTab.document.body.innerHTML = `<img src="${imageUrl}" style="width: 100%; height: auto;" />`;
-        }
+      // Reset dither slider to default (10)
+      ditherSlider.value = 10;
+      ditherValue.textContent = 10;
 
-        // Generate the gradient when the page loads
-        window.onload = generateGradient;
+      // Reset width and height to device resolution
+      getDeviceResolution();
+    }
 
-        // Regenerate the gradient on window resize
-        window.onresize = generateGradient;
-    </script>
+    // Event listener for the reset button
+    document.getElementById('reset').addEventListener('click', resetForm);
+
+    // Function to apply dithering (noise) to the image
+    function applyDithering(imageData, ditherAmount) {
+      const data = imageData.data;
+      const noiseFactor = ditherAmount / 1000; // Control noise intensity with slider value
+
+      // Loop through each pixel in the image
+      for (let i = 0; i < data.length; i += 4) {
+        // Add noise to the RGB values
+        data[i] += (Math.random() * 2 - 1) * noiseFactor * 255; // Red
+        data[i + 1] += (Math.random() * 2 - 1) * noiseFactor * 255; // Green
+        data[i + 2] += (Math.random() * 2 - 1) * noiseFactor * 255; // Blue
+
+        // Ensure color values are within bounds (0-255)
+        data[i] = Math.min(255, Math.max(0, data[i]));
+        data[i + 1] = Math.min(255, Math.max(0, data[i + 1]));
+        data[i + 2] = Math.min(255, Math.max(0, data[i + 2]));
+      }
+    }
+
+    // Function to generate the gradient
+    function generateGradient() {
+      const color1 = document.getElementById('color1').value;
+      const color2 = document.getElementById('color2').value;
+      const direction = document.querySelector('input[name="direction"]:checked').value;
+      const ditherAmount = ditherSlider.value;
+      const width = document.getElementById('width').value;
+      const height = document.getElementById('height').value;
+
+      // Map direction to gradient start and end coordinates based on your mapping
+      let startX, startY, endX, endY;
+
+      switch(direction) {
+        case '↗': // Bottom-left to top-right
+          startX = 0; startY = height; endX = width; endY = 0;
+          break;
+        case '→': // Left to right
+          startX = 0; startY = 0; endX = width; endY = 0;
+          break;
+        case '↘': // Top-left to bottom-right
+          startX = 0; startY = 0; endX = width; endY = height;
+          break;
+        case '↓': // Top to bottom
+          startX = 0; startY = 0; endX = 0; endY = height;
+          break;
+        case '↙': // Top-right to bottom-left
+          startX = width; startY = 0; endX = 0; endY = height;
+          break;
+        case '←': // Right to left
+          startX = width; startY = 0; endX = 0; endY = 0;
+          break;
+        case '↖': // Bottom-right to top-left
+          startX = width; startY = height; endX = 0; endY = 0;
+          break;
+        case '↑': // Bottom to top
+          startX = 0; startY = height; endX = 0; endY = 0;
+          break;
+      }
+
+      // Create the image in a canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = width;
+      canvas.height = height;
+
+      // Create gradient with direction
+      const grd = ctx.createLinearGradient(startX, startY, endX, endY);
+      grd.addColorStop(0, color1);
+      grd.addColorStop(1, color2);
+
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Get image data from canvas and apply dithering
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      applyDithering(imageData, ditherAmount); // Apply dithering (noise)
+      ctx.putImageData(imageData, 0, 0);
+
+      // Open the generated image in a new tab
+      const imageUrl = canvas.toDataURL('image/png');
+      const newWindow = window.open();
+      newWindow.document.write(`<img src="${imageUrl}" alt="Generated Wallpaper" />`);
+    }
+
+    // Event listener for the generate button
+    document.getElementById('generate').addEventListener('click', generateGradient);
+  </script>
 </body>
 </html>
