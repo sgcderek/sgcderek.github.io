@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Info</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: black;
+            color: white;
+            margin: 0px 20px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <pre id="screen-info">Loading...</pre>
+
+    <script>
+        function updateScreenInfo() {
+            const cssWidth = window.screen.width;
+            const cssHeight = window.screen.height;
+            const realWidth = cssWidth * window.devicePixelRatio;
+            const realHeight = cssHeight * window.devicePixelRatio;
+            const dpr = window.devicePixelRatio;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const colorDepth = window.screen.colorDepth;
+            const orientation = window.screen.orientation.type;
+            const availWidth = window.screen.availWidth;
+            const availHeight = window.screen.availHeight;
+
+            document.getElementById("screen-info").innerText = `CSS Resolution:
+${cssWidth} x ${cssHeight}
+
+Actual Resolution:
+${realWidth} x ${realHeight}
+
+Device Pixel Ratio:
+${dpr}
+
+Viewport Size:
+${viewportWidth} x ${viewportHeight}
+
+Available Screen Size:
+${availWidth} x ${availHeight}
+
+Color Depth:
+${colorDepth}-bit
+
+Orientation:
+${orientation}
+`;
+        }
+        
+        window.onload = updateScreenInfo;
+    </script>
+</body>
+</html>
