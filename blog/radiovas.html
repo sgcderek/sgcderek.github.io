@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+<title>První "fotografie" pořízená Vlašimským radioteleskopem</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/styles/default.css">
+</head>
+
+<body>
+<h1>První "fotografie" pořízená Vlašimským radioteleskopem</h1>
+<p><i>25 Září 2025</i></p>
+
+<hr class="solid">
+
+<p>Mezi 1. a 23. zářím 2025 byla východní parabolou původního radiointerferometru na Hvězdárně Vlašim sbírána data o distribuci neutrálního vodíku v naší galaxii. Tato data byla zpracována do finální "fotografie" kterou v plném rozlišení najdete ke konci této stránky.</p>
+
+<p>Radioteleskop se skládá z pěti hlavních částí; 2.5 metrová parabola namířená na oblohu, zářič v ohnisku paraboly (tj. anténa na kterou parabola signál soustředí), zesilovač s filtrem umístěný na zadní straně zářiče, USB radiopřijímač připojený k výstupu zesilovače koaxiálním kabelem, a jednodeskový počítač který data z přijímače zpracovává a zaznamenává (v tomto případě Raspberry Pi 5).</p>
+
+<p>V normálním provozu je přijímač naladěný na centrální frekvenci 1420.5 MHz s šířkou pásma 1 MHz. V tomto frekvenčním rozsahu (1420-1421 MHz) se také nachází tzv. "21cm vodíková čára", a to na frekvenci 1420.406 MHz. Tato "čára" je výsledkem rádiového vyzařování atomů neutrálního vodíku, který je zdaleka tím nejčetnějším prvkem v mezihvězdné hmotě. Tato rádiová stopa je tak patrná že frekvence kolem ní nebo její násobky jsou často subjektem pátrání po možných mimozemských civilizacích, protože vychází z fyzikálních vlastností vodíku které jsou všude ve vesmíru stejné bez ohledu na to kdo a jak jí měří. Její vlnová délka byla také použita jako "univerzální měřítko" vyryté do zlatých desek družic Pioneer 10 a 11 a Voyager 1 a 2, v případě že je někdy nějaká jiná civilizace objeví.</p>
+
+<p>I přes to že vodík vyzařuje na konstantní, neměnné frekvenci, signál který měříme na Zemi je "rozprostřený a deformovaný", a to převážně důsledkem Dopplerova jevu způsobeného relativním pohybem Země a ramen naší galaxie. Protože víme přesně na jaké frekvenci signál má být, můžeme vypočítat frekvenční odchylku a z ní rychlost částí galaxie na kterou anténa míří. Rádiové pozorování 21cm vodíkové čáry v 50. letech 20. století bylo klíčem k objevu spirálového tvaru naší vlastní galaxie.</p>
+
+<p>Pořízení této fotky probíhalo tak že přijímač připojený k parabole každou minutu zapsal pozorovanou sílu signálu na různých frekvencích mezi 1420 a 1421 MHz. Během té minuty se planeta Země trochu otočila, takže během další minuty měření už parabola mířila na jiné místo na obloze. Rotace planety byla tedy využitá jako "motor" co pomalu točí s parabolou od západu k východu, takzvaný "drift scan". Zorné pole antény prochází tím samým místem na obloze každých 23.934 hodin - po obloze opíše kružnici se středem u hvězdy Polárky každý 1 hvězdný den.</p>
+
+<p>Toto ovšem pro pořízení opravdové fotografie nestačí; parabola v "drift scanu" každý den vzorkuje tu samou část oblohy, takže kdybychom chtěli data zpracovat do obrázku, byl by jenom 1 pixel vysoký. Bylo proto nutné každý den ručně pozměnit náklon paraboly (znázorněný červeným 7-segmentovým displejem na její zadní straně), čímž se docílilo toho že se každý den naměřil o trochu jiný řádek pixelů. První vizuální znázornění které můžete vidět pod tímto paragrafem fungovalo tak že se jednotlivé naměřené minuty zpracovaly jako body na 2D souřadnicích; náklon antény ve stupních funguje jako hodnota svislé osy, zatímco úhel rotace Země ovlivní pozici na ose vodorovné. Za pomoci těchto dvou souřadnic je do obrázku umístěn 1 bod (pixel), jehož světlost je dána naměřenou sílou signálu vodíkové čáry.</p>
+
+<p><i>(Pozn.: v následujících příkladech jsou náklon antény a rotace země přepočítány do hvězdných koordinátů, tedy rektascenze (vodorovná osa) a deklinace (svislá osa). Na podobě obrázku to nic nemění, pouze ho to otočí a umožní jednodušší porovnání s hvězdnou mapou)</i></p>
+
+<p><img src="/images/vas/map-bw-sep2025.png" width="50%"/></p>
+
+<p>Jak je vidět tak obrázek v této fázi není moc pohledný, to převážně proto že se zatímco na vodorovné ose generujeme 1 pixel každou minutu, na té svislé je to 1 pixel každý den. Výsledkem je tedy "rozptýlený" obraz. Pokud bychom chtěli stejnou hustotu pixelů na obou osách (a přitom zachovat stejné rozlišení), muselo by měření místo cca 23 dnů běžet půl roku. Dosáhlo by se tak sice většího počtu dat, ovšem rozlišovací schopnost 2.5-metrové paraboly v této konfiguraci je několik stupňů. Vzhledem k tomu že naše parabola může prozatím mířit pouze mezi přibližně 6 a 72 stupni nad obzorem (~66° výškový rozsah), naměřilo se pouze 16 jednotlivých úrovní. Experiment sice běžel přes tři týdny, ovšem ne každý den bylo možné parabolu namířit, určité časové úseky se musely z dat vyjmout kvůli rádiovému rušení, a jeden den měření byl narušen výpadkem elektrického proudu.</p>
+
+<p>Další fáze zpracování obrázku je tzv. "interpolace". Tímto se vyplní prázdné místo mezi naměřenými řádky, a to tak že se vypočítají gradienty mezi body se známými hodnotami. Vznikne tak sjednocený obraz, kde zbývající chybějící data jsou způsobeny fyzickou limitací náklonu antény (černý pás dole) a tím že se Česká Republika nachází 50 stupňů nad rovníkem a není tak možné nahlédnout na části oblohy pod naším horizontem (černý pás nahoře).</p>
+
+<p><img src="/images/vas/map-bwi-sep2025.png" width="50%"/></p>
+
+<p>Jsou patrné dva pásy kde byl signál vodíku nejsilnější; to jsou ramena naší galaxie kde je koncentrace tohoto prvku nejvyšší. Kdyby se anténa mohla namířit až na Polárku, tedy na bod oblohy který protíná zemská osa, bylo by možné doplnit chybějící data ze spodní části obrázku a bylo by vidět že se jedná o jeden celistvý pás který tvoří Mléčná Dráha. Pro ilustrační účely můžeme do těchto míst dosadit "klasickou" optickou fotografii hvězd od NASA používající stejnou projekci. Je tak hned pochopitelnější na co se vlastně díváme;</p>
+
+<p><img src="/images/vas/map-bwi-gal-sep2025.png" width="50%"/></p>
+
+<p>Další vylepšení naší fotografie je možné přidáním barev. Jedna možnost je použitím tzv. LUT (look-up table), podobně jako se zabarvuje černobílý obraz z termokamer, ovšem vzhledem k tomu že přijímač vzorkoval několik stovek jednotlivých frekvencí během každé minuty měření tak můžeme místo jednoho černobílého obrazu nadefinovat rovnou tři, každý složený ze třetiny měřeného pásma, a pak je spojit do jedné barevné RGB fotografie, stejně jako funguje barevné focení ve viditelném spektru na které jsme zvyklí;</p>
+
+<p><img src="/images/vas/map-rgb-gal-sep2025.png" width="50%"/></p>
+
+<p>Po přidání barev je ihned mnohem lépe patrná "mlhovinová" struktura mezihvězdné hmoty viditelné kolem Mléčné Dráhy. Zbarvením také můžeme poznat frekvenční posun způsobený Dopplerovým jevem; červená barva má nižší frekvenci, větší vlnovou délku, znamená to že se pohybuje směrem od nás, modrá je naopak vyšší frekvence a pohybuje se směrem k nám. Fialové oblasti obsahují hmotu pohybující se v obou směrech, zelené jsou relativně statické.</p>
+
+<p>V našem případě jsou barvy hlavně pro zlepšení kontrastu a vzhledu fotografie; pro opravdové měření rychlosti a tvaru galaxie by bylo nutné provést lepší frekvenční kalibraci a také odečíst nežádoucí Dopplerův posuv způsobený rotací naší vlastní planety. Toto je něco co bude cílem budoucích měření po vylepšení hardwaru radioteleskopu, což by také mělo zlepšit jeho rozlišovací schopnost a budoucí fotografii tak "zaostřit". Při tomto měření také došlo k chybnému nastavení přijímače - vzorkovaná šířka pásma nebyla dostatečně velká, a došlo tak k tomu že v místech s velmi intenzivním rádiovým zářením jí šířka vodíkové čáry překročila, což dále mělo za následek ztrátu referenčního šumu v pozadí a patrný "propad" měřených hodnot. To se projevilo jako dvě tmavé "šmouhy" v ramenech galaxie kde by ve skutečnosti měla být intenzita nejvyšší.</p>
+
+<p>I přes tyto nedostatky však můžeme pokračovat ve zpracování první fotografie. Až do teď používaly všechny mapy hodnot takzvanou "ekvidistantní válcovou projekci", a to převážně proto že ta vznikla implicitně zanesením naměřených bodů za pomoci koordinátů jako bylo popsáno výše. Ovšem vzhledem k tomu že mapujeme převážně naší galaxii, bylo by lepší použít souřadnicový systém paralelní s jejím diskem, takže místo hvězdných souřadnic použijeme galaktické. Také přejdeme na "Mollweidovo zobrazení" které používá většina projektů mapujících galaxii z pohledu Země, ať již v rádiovém nebo viditelném spektru;</p>
+
+<p><img src="/images/vas/map-rgbp-sep2025.png" width="50%"/></p>
+
+<p>Toto zobrazení je komplexnější než ekvidistantní válcové, ovšem má tu výhodu že mnohem lépe zachová opravdové proporce svého obsahu. Přechod na galaktické souřadice také ramena "srovná" do jednotného vodorovného disku.</p>
+
+<p>Dále můžeme také trochu upravit barvy, ovšem místo jakékoliv manuální editace stačí pouze posunout odstíny přítomných barev. Na Mollweidovo zobrazení je dále vykreslena souřadnicová mřížka pro lepší ilustraci použité projekce, a na konec jsou také přidány dva barevné kruhy; kruh vlevo zobrazuje referenční barevné spektrum zatímco kruh vpravo je spektrum které prošlo stejným barevným posunem jako samotná fotografie, a umožní tak zachování barevného frekvenčního komponentu (víme že například červená v originálu znamená nízká frekvence, na posunutém kruhu je na místo červené fialová, takže ve fotografii znamená nízkou frekvenci fialová).</p>
+
+<p><img src="/images/vas/map-final-sep2025.png" width="100%"/></p>
+
+</body>
+</html>
