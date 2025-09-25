@@ -28,21 +28,21 @@
 
 <p><i>(Pozn.: v následujících příkladech jsou náklon antény a rotace země přepočítány do hvězdných koordinátů, tedy rektascenze (vodorovná osa) a deklinace (svislá osa). Na podobě obrázku to nic nemění, pouze ho to otočí a umožní jednodušší porovnání s hvězdnou mapou)</i></p>
 
-<p><img src="/images/vas/map-bw-sep2025.png" width="50%"/></p>
+<p><img src="/images/vas/map-bw-sep2025.png" width="100%"/></p>
 
 <p>Jak je vidět tak obrázek v této fázi není moc pohledný, to převážně proto že zatímco na vodorovné ose generujeme 1 pixel každou minutu, na té svislé je to 1 pixel každý den. Výsledkem je tedy "rozptýlený" obraz. Pokud bychom chtěli stejnou hustotu pixelů na obou osách (a přitom zachovat stejné rozlišení), muselo by měření místo cca 23 dnů běžet půl roku. Dosáhlo by se tak sice většího počtu dat, ovšem rozlišovací schopnost 2.5-metrové paraboly v této konfiguraci není zase tak dobrá, takže v praxi stačí denní posuny nahoru nebo dolů o 3 až 5 stupňů. Vzhledem k tomu že naše parabola může prozatím mířit pouze mezi přibližně 6 a 72 stupni nad obzorem (~66° výškový rozsah), naměřilo se pouze 16 jednotlivých úrovní. Experiment sice běžel přes tři týdny, ovšem ne každý den bylo možné parabolu namířit, určité časové úseky se musely z dat vyjmout kvůli rádiovému rušení, a jeden den měření byl narušen výpadkem elektrického proudu.</p>
 
 <p>Další fáze zpracování obrázku je tzv. "interpolace". Tímto se vyplní prázdné místo mezi naměřenými řádky, a to tak že se vypočítají gradienty mezi body se známými hodnotami. Vznikne tak sjednocený obraz, kde zbývající chybějící data jsou způsobeny fyzickou limitací náklonu antény (černý blok nahoře) a tím že se Česká Republika nachází 50 stupňů nad rovníkem a není tak možné nahlédnout na části oblohy pod naším horizontem (černý blok dole).</p>
 
-<p><img src="/images/vas/map-bwi-sep2025.png" width="50%"/></p>
+<p><img src="/images/vas/map-bwi-sep2025.png" width="100%"/></p>
 
 <p>Jsou patrné dva pásy kde byl signál vodíku nejsilnější; to jsou ramena naší galaxie kde je koncentrace tohoto prvku nejvyšší. Kdyby se anténa mohla namířit až na Polárku, tedy na bod oblohy který protíná zemská osa, bylo by možné doplnit chybějící data z vrchní části obrázku a bylo by vidět že se jedná o jeden celistvý pás který tvoří Mléčná Dráha. Pro ilustrační účely můžeme do těchto míst dosadit "klasickou" optickou fotografii hvězd od NASA používající stejnou projekci. Je tak hned pochopitelnější na co se vlastně díváme;</p>
 
-<p><img src="/images/vas/map-bwi-gal-sep2025.png" width="50%"/></p>
+<p><img src="/images/vas/map-bwi-gal-sep2025.png" width="100%"/></p>
 
 <p>Další vylepšení naší fotografie je možné přidáním barev. Jedna možnost je použitím tzv. LUT (look-up table), podobně jako se zabarvuje černobílý obraz z termokamer, ovšem vzhledem k tomu že přijímač vzorkoval několik stovek jednotlivých frekvencí během každé minuty měření tak můžeme místo jednoho černobílého obrazu nadefinovat rovnou tři, každý složený ze třetiny měřeného pásma, a pak je spojit do jedné barevné RGB fotografie, stejně jako funguje barevné focení ve viditelném spektru na které jsme zvyklí;</p>
 
-<p><img src="/images/vas/map-rgb-gal-sep2025.png" width="50%"/></p>
+<p><img src="/images/vas/map-rgb-gal-sep2025.png" width="100%"/></p>
 
 <p>Po přidání barev je ihned mnohem lépe patrná "mlhovinová" struktura mezihvězdné hmoty viditelné kolem Mléčné Dráhy. Zbarvením také můžeme poznat frekvenční posun způsobený Dopplerovým jevem; červená barva má nižší frekvenci, větší vlnovou délku, znamená to že se pohybuje směrem od nás, modrá je naopak vyšší frekvence a pohybuje se směrem k nám. Fialové oblasti obsahují hmotu pohybující se v obou směrech, zelené jsou relativně statické.</p>
 
@@ -50,7 +50,7 @@
 
 <p>I přes tyto nedostatky však můžeme pokračovat ve zpracování první fotografie. Až do teď používaly všechny mapy hodnot takzvanou "ekvidistantní válcovou projekci", a to převážně proto že ta vznikla přirozeně zanesením naměřených bodů za pomoci koordinátů jako bylo popsáno výše. Ovšem vzhledem k tomu že mapujeme převážně naší galaxii, bylo by lepší použít souřadnicový systém paralelní s jejím diskem, takže místo hvězdných souřadnic použijeme galaktické. Také přejdeme na "Mollweidovo zobrazení" které používá většina projektů mapujících galaxii z pohledu Země, ať již v rádiovém nebo viditelném spektru;</p>
 
-<p><img src="/images/vas/map-rgbp-sep2025.png" width="50%"/></p>
+<p><img src="/images/vas/map-rgbp-sep2025.png" width="100%"/></p>
 
 <p>Toto zobrazení je komplexnější než ekvidistantní válcové, ovšem má tu výhodu že mnohem lépe zachová opravdové proporce svého obsahu. Přechod na galaktické souřadice také ramena "srovná" do jednotného vodorovného disku. Bloky chybějících dat se také přesunuly a změnily tvar protože mapa již nemá nic společného se zemskou osou.</p>
 
