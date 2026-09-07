@@ -9,9 +9,59 @@
 <link rel="stylesheet" href="/styles/default.css">
 </head>
 
-<body style="text-align: center;">
+<body style="text-align: center;" onkeyup="changeBackgroundImage(event)">
 
-<p>index</p>
+<h1>sgcderek</h1>
+
+<p>To see more of my content or to contact me, check out my social media links below;</p>
+<p><a href="https://www.youtube.com/channel/UCSHVnVnUErLxEU1mfWM3EBw" target="_blank">YouTube</a> - <a href="https://github.com/sgcderek" target="_blank">GitHub</a> - <a href="https://bsky.app/profile/dereksgc.bsky.social" target="_blank">Bluesky</a></p>
+<p>You can join my Discord server by clicking <a href="https://discord.gg/7V8HatpacQ" target="_blank">here</a>.</p>
+
+<hr class="solid">
+
+<p>As of July 2026 I once again have the amateur radio callsign OK9SGC (license valid until 2031). I am planning to be active on the QO-100 satellite transponder, primarily using SSTV and experimental DVB-S2. If you want to schedule a contact preferably let me know through the ham radio room of the Discord server linked above (that way other people can participate even if I can't), or you can find my email by visiting my YouTube channel and clicking on "more information".</p>
+
+<p>Americans and other people west of QO-100's footprint are encouraged to learn about the joint ESA/ORI/AMSAT <a href="https://www.openresearch.institute/2025/08/04/what-is-the-esa-futuregeo-project/" target="_blank">FutureGEO</a> concept.</p>
+
+<hr class="solid">
+
+<p style="line-height: 1.8;">
+	<a>Useful links;</a><br />
+	<a href="/tools/helix-calc.html">Helical antenna calculator</a><br />
+	<a href="/tools/screenres.html" target="_blank">Device screen information</a><br />
+</p>
+
+<hr class="solid">
+
+<p style="line-height: 1.8;">
+	<a>Other text posts;</a><br />
+    <a href="/blog/nokia-3310.html">Nokia 3310 USB-C and battery modification</a><br />
+    <a href="/blog/noaa-21-briefing.html">All you need to know about the upcoming NOAA-21 satellite</a><br />
+    <a href="/blog/artemis-1.html">Artemis I mission radio frequency allocations</a><br />
+    <a href="/blog/CGMS50.html">CGMS 50 weather satellite status summary</a><br />
+    <a href="/blog/kgstv-reception.html">How to receive and decode KG-STV image transmissions</a><br />
+    <a href="/blog/beginner-hrpt-guide.html">Beginner's guide to HRPT reception</a><br />
+    <a href="/blog/lnb-high-band-mod.html">Hard-wiring an LNB to use the high band 10.6 GHz oscillator</a><br />
+    <a href="/blog/starlink-beacons.html">Receiving Starlink satellite beacons on a budget</a><br />
+    <a href="/blog/noaa2-revival.html">NOAA-2 returning from the dead</a>
+</p>
+
+<hr class="solid">
+
+<p>Special thanks to;</p>
+<p><span style="color: #389900;">brongle</span><span style="color: #00994d;"> - microp11 - thebaldgeek - Xerbo - Whatwhatphysics - yakko warner - BackHive - Carl Reinemann - hmdsamarasekara - Nautiluscl - Martin HB9FXX - KentuckyFriedData - Pablo de la Fuente - LudaN - Mikael Falkvidd - transistorman - Skunkola - AsciiWolf - Steven Kittelsen - Tecas Science Guy - R1chä - Damian Nowak</span></p>
+
+<script>
+    let buffer = "";
+    function changeBackgroundImage(event) {
+        buffer = (buffer + event.key).slice(-8);
+        if (buffer.toLowerCase() === "aiwprton") {
+            document.body.style.backgroundImage = "url('images/rhino.webp')";
+            document.body.style.backgroundSize = "cover";
+            buffer = "";
+        }
+    }
+</script>
 
 </body>
 </html>
